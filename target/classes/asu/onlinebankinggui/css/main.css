@@ -2,6 +2,7 @@
 * {
     -fx-font-family: 'PT Sans Narrow', sans-serif;
     -fx-font-size: 18;
+    -fx-focus-color: transparent;
 }
 
 .button {
@@ -46,4 +47,21 @@
 
 .table-row-cell:selected {
     -fx-border-color: black;
+}
+
+.table:selected{
+    -fx-border-style: none;
+}
+
+table-view:focused .table-row-cell:focused {
+    -fx-background-color: -fx-table-cell-border-color, -fx-background;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-row-cell {
+    -fx-table-cell-border-color: transparent;
+}
+
+.label{
+    -fx-font-size: 28;
 }

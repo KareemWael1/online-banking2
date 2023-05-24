@@ -14,17 +14,17 @@
                 <Image url="@images/BankIcon.png" />
             </image>
         </ImageView>
-        <Button layoutX="150.0" layoutY="400.0" mnemonicParsing="false" onAction="#onMyAccountsButtonClick" prefHeight="40.0" prefWidth="125.0" text="My Accounts">
+        <Button layoutX="76.0" layoutY="400.0" mnemonicParsing="false" onAction="#onMyAccountsButtonClick" prefHeight="40.0" prefWidth="125.0" text="My Accounts">
             <font>
                 <Font name="Dubai Regular" size="14.0" />
             </font>
         </Button>
-        <Button layoutX="525.0" layoutY="400.0" mnemonicParsing="false" onAction="#onBillsButtonClick" prefHeight="40.0" prefWidth="125.0" text="Bills" textAlignment="CENTER">
+        <Button layoutX="414.0" layoutY="400.0" mnemonicParsing="false" onAction="#onBillsButtonClick" prefHeight="40.0" prefWidth="125.0" text="Bills" textAlignment="CENTER">
             <font>
                 <Font name="PT Bold Heading" size="14.0" />
             </font>
         </Button>
-        <Button layoutX="333.0" layoutY="400.0" mnemonicParsing="false" onAction="#onInventoryButtonClick" prefHeight="40.0" prefWidth="125.0" text="Inventory">
+        <Button layoutX="244.0" layoutY="400.0" mnemonicParsing="false" onAction="#onInventoryButtonClick" prefHeight="40.0" prefWidth="125.0" text="Inventory">
             <font>
                 <Font name="Dubai Regular" size="14.0" />
             </font>
@@ -34,6 +34,14 @@
                 <Font name="Dubai Regular" size="14.0" />
             </font>
         </Button>
-        <Label fx:id="welcomeText" layoutX="338.0" layoutY="349.0" text="Welcome, User!" />
+        <Label fx:id="welcomeText" alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="343.0" prefHeight="40.0" prefWidth="800.0" style="-fx-font-size: 28;" styleClass="label" stylesheets="@css/main.css" text="Welcome, User!">
+         <font>
+            <Font name="Arial Narrow" size="38.0" />
+         </font></Label>
+      <Button layoutX="581.0" layoutY="400.0" mnemonicParsing="false" onAction="#onNotificationsButtonClick" prefHeight="40.0" prefWidth="125.0" text="Notifications" textAlignment="CENTER">
+         <font>
+            <Font name="PT Bold Heading" size="14.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

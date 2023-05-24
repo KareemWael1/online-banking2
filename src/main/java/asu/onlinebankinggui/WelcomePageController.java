@@ -17,7 +17,12 @@ public class WelcomePageController {
     }
 
     @FXML
+    protected void onExitButtonClick(){
+        OnlineBankingSystem.getStage().close();
+    }
+
+    @FXML
     protected void onTest() throws IOException{
-        changeScene("MyAccountsPage.fxml");
+        changeScene("MyInventoryPage.fxml");
     }
 }

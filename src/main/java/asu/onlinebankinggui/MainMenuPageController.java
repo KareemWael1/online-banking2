@@ -37,6 +37,11 @@ public class MainMenuPageController implements Initializable {
     }
 
     @FXML
+    protected void onNotificationsButtonClick() throws IOException {
+        // TODO Add notification fxml
+    }
+
+    @FXML
     protected void onLogoutButtonClick() throws IOException {
         // TODO Add logout()
     }

@@ -26,6 +26,5 @@
                 <Font name="Dubai Regular" size="14.0" />
             </font>
         </Button>
-        <Label fx:id="select" alignment="CENTER" layoutX="222.0" layoutY="410.0" prefHeight="27.0" prefWidth="392.0" text="Please Select an account" textFill="RED" visible="false" />
     </children>
 </AnchorPane>

@@ -12,5 +12,6 @@ module asu.onlinebankinggui {
 
     opens asu.onlinebankinggui to javafx.fxml;
     opens asu.onlinebankinggui.source.src to javafx.base;
+    opens asu.onlinebankinggui.StupDataClassses to javafx.base;
     exports asu.onlinebankinggui;
 }
