@@ -20,6 +20,7 @@
 
 .table{
     -fx-background-color: white;
+    -fx-text-fill: black;
 }
 
 .table-view .column-header{
@@ -41,4 +42,8 @@
 
 .title{
     -fx-font-size: 32;
+}
+
+.table-row-cell:selected {
+    -fx-border-color: black;
 }

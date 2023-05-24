@@ -49,6 +49,7 @@ public class MyAccountsPageController implements Initializable{
         ArrayList<Account> accountsArray = new ArrayList<>();
         accountsArray.add(new Account(new User("Kareem", "Kimo", "123"), "Saving"));
         accountsArray.add(new Account(new User("Kareem", "Kimo", "123"), "Checking"));
+        accountsArray.add(new Account(new User("Kareem", "Kimo", "123"), "Saving"));
         return FXCollections.observableList(accountsArray);
     }
 
