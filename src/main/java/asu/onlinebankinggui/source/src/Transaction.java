@@ -2,49 +2,32 @@ package asu.onlinebankinggui.source.src;
 
 import java.time.LocalDateTime;
 
-public class Transaction {
-    private static int idCounter = 0;
-    private final int id;
-    private final double amount;
-    private final LocalDateTime date;
-    private final Account fromAccount;
-    private Account toAccount;
+class Transaction {
+    public final int fromAccountNumber;
+    public final float amount;
+    public final LocalDateTime date;
+    private int toAccount;
     private boolean isToItem;
-    private Item item;
+    private String item;
 
-    public Transaction(double amount, Account fromAccount) {
+    public Transaction(float amount, int fromAccount) {
+        if (!Account.getAccountNumbers().contains(fromAccount))
+            throw new IllegalArgumentException("Account with number " + fromAccount + " does not exist");
         this.amount = amount;
-        this.fromAccount = fromAccount;
-        this.id = idCounter++;
+        this.fromAccountNumber = fromAccount;
         this.date = LocalDateTime.now();
     }
-    public Transaction(double amount, Account fromAccount, Account toAccount) {
+    public Transaction(float amount, int fromAccount, int toAccount) {
         this(amount, fromAccount);
         this.toAccount = toAccount;
         this.isToItem = false;
         this.item = null;
     }
-    public Transaction(Account fromAccount, Item toItem) {
-        this(toItem.getPrice(), fromAccount);
-        this.toAccount = null;
+    public Transaction(int fromAccount, String toItem) {
+        this(Shop.getPrice(toItem), fromAccount);
+        this.toAccount = -1;
         this.isToItem = true;
         this.item = toItem;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public Account getFromAccount() {
-        return fromAccount;
     }
 
     public Object getRecipient() {
@@ -53,5 +36,28 @@ public class Transaction {
         } else {
             return toAccount;
         }
+    }
+
+    /** TODO: implement this method
+     * Returns an array of the transaction details
+     * @return The array contains the following elements:
+     * <ol start="0">
+     *   <li>fromAccountNumber - type: int
+     *   <li>amount - type: float
+     *   <li>date - type: LocalDateTime
+     *   <li>toAccount - type: int
+     *   <li>isToItem - type: boolean
+     *   <li>item - type: String
+     */
+    public Object[] getData() {
+        Object[] transactionDetails = new Object[6];
+        transactionDetails[0] = fromAccountNumber;
+        transactionDetails[1] = amount;
+        transactionDetails[2] = date;
+        transactionDetails[3] = toAccount;
+        transactionDetails[4] = isToItem;
+        transactionDetails[5] = item;
+
+        return transactionDetails;
     }
 }

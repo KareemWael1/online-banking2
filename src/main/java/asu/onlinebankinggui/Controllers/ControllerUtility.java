@@ -1,5 +1,6 @@
-package asu.onlinebankinggui;
+package asu.onlinebankinggui.Controllers;
 
+import asu.onlinebankinggui.OnlineBankingSystem;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

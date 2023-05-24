@@ -1,4 +1,4 @@
-package asu.onlinebankinggui;
+package asu.onlinebankinggui.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -6,21 +6,17 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-import static asu.onlinebankinggui.ControllerUtility.changeScene;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
 
-public class SignupPageController {
-    @FXML
-    private TextField firstName;
-    @FXML
-    private TextField lastName;
+public class LoginPageController {
     @FXML
     private TextField email;
     @FXML
     private PasswordField password;
 
     @FXML
-    protected void onSignupButtonClick() {
-        // TODO: Call signup() from backend
+    protected void onLoginButtonClick() throws IOException{
+        // TODO: Call login() from backend
     }
 
     @FXML

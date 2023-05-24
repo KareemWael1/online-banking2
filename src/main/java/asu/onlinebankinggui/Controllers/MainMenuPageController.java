@@ -1,4 +1,4 @@
-package asu.onlinebankinggui;
+package asu.onlinebankinggui.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static asu.onlinebankinggui.ControllerUtility.*;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.*;
 
 public class MainMenuPageController implements Initializable {
     String userName = "user";

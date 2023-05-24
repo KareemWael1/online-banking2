@@ -1,8 +1,9 @@
-package asu.onlinebankinggui;
+package asu.onlinebankinggui.Controllers;
 
+import asu.onlinebankinggui.OnlineBankingSystem;
 import javafx.fxml.FXML;
 import java.io.IOException;
-import static asu.onlinebankinggui.ControllerUtility.changeScene;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
 
 public class WelcomePageController {
 

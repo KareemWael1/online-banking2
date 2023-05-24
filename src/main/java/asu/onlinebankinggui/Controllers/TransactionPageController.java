@@ -1,13 +1,10 @@
-package asu.onlinebankinggui;
+package asu.onlinebankinggui.Controllers;
 
-import asu.onlinebankinggui.source.src.Transaction;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;
-
-import static asu.onlinebankinggui.ControllerUtility.changeScene;
 
 public class TransactionPageController {
 

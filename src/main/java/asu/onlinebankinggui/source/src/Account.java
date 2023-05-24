@@ -2,42 +2,36 @@ package asu.onlinebankinggui.source.src;
 
 import java.util.ArrayList;
 
-public class Account {
-    private static ArrayList<Account> accounts = new ArrayList<Account>();
+class Account {
+    private static final ArrayList<Account> accounts = new ArrayList<>();
     private static int number_counter = 0;
     private final int number;
-    private double balance;
-    private final ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-    private final User owner;
-    private final String type;
+    private float balance;
+    private final ArrayList<Transaction> transactions = new ArrayList<>();
+    private final User user;
 
-    public Account(User owner, String type) {
+    // Constructor
+    Account(User user) {
         number = number_counter++;
-        balance = 0.0;
-        this.owner = owner;
+        balance = 0;
+        this.user = user;
         accounts.add(this);
-        this.type = type;
     }
 
-    public static Account getAccountByNumber(int number) {
+    // Static functions
+    static Account getAccountByNumber(int number) {
         for(Account account : accounts)
             if (account.getNumber() == number)
                 return account;
         return null;
     }
 
-    public void deposit(double amount) {
-        if (amount < 0)
-            throw new IllegalArgumentException("Amount must be positive");
-
+    // Money functions
+    public void deposit(float amount) {
         balance += amount;
     }
-
-    public boolean withdraw(double amount) {
-        if (amount < 0)
-            throw new IllegalArgumentException("Amount must be positive");
-
-        double new_balance = balance - amount;
+    public boolean withdraw(float amount) {
+        float new_balance = balance - amount;
         if (new_balance < 0) {
             return false;
         }
@@ -46,44 +40,41 @@ public class Account {
         return true;
     }
 
-    public boolean transfer(double amount, Account to_account) {
-        if (amount < 0)
-            throw new IllegalArgumentException("Amount must be positive");
+    // Transaction functions
+    public void transact(float amount, int other_account_number) {
+        Account other = getAccountByNumber(other_account_number);
+        if (other == null)
+            throw new IllegalArgumentException("Account with number " + other_account_number + " does not exist");
 
-        if (!withdraw(amount))
-            return false;
+        transactions.add(new Transaction(amount, this.getNumber(), other_account_number));
+    }
+    public void transact(float amount, String name) {
+        if (!Shop.itemExisted(name))
+            throw new IllegalArgumentException("Item with name " + name + " does not exist");
 
-        to_account.deposit(amount);
-        transactions.add(new Transaction(amount, this, to_account));
-        return true;
+        transactions.add(new Transaction(this.getNumber(), name));
     }
 
-    public boolean buy(Item item) {
-        if (item == null)
-            throw new IllegalArgumentException("Item cannot be null");
 
-        if (!item.buy(this)) return false;
-        transactions.add(new Transaction(this, item));
-        return true;
-    }
-
-    public double getBalance() {
+    // getters
+    public float getBalance() {
         return balance;
     }
-
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
-
-    public User getOwner() {
-        return owner;
+    public String getUsername() {
+        return user.getUsername();
     }
-
     public int getNumber() {
         return number;
     }
 
-    public String getType() {
-        return type;
+    // Function that returns an ArrayList of all the account numbers
+    public static ArrayList<Integer> getAccountNumbers() {
+        ArrayList<Integer> account_numbers = new ArrayList<>();
+        for(Account account : accounts)
+            account_numbers.add(account.getNumber());
+        return account_numbers;
     }
 }

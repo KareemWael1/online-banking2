@@ -1,8 +1,6 @@
-package asu.onlinebankinggui;
+package asu.onlinebankinggui.Controllers;
 
 
-import asu.onlinebankinggui.source.src.Account;
-import asu.onlinebankinggui.source.src.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static asu.onlinebankinggui.ControllerUtility.changeScene;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
 
 public class MyAccountsPageController implements Initializable{
     @FXML

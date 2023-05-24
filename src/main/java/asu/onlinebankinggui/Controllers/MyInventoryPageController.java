@@ -1,4 +1,4 @@
-package asu.onlinebankinggui;
+package asu.onlinebankinggui.Controllers;
 
 import asu.onlinebankinggui.StupDataClassses.InventoryData;
 import javafx.collections.FXCollections;
@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static asu.onlinebankinggui.ControllerUtility.changeScene;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
 
 public class MyInventoryPageController implements Initializable {
     @FXML
