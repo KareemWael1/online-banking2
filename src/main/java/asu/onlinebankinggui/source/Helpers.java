@@ -1,4 +1,4 @@
-package asu.onlinebankinggui.source.src;
+package asu.onlinebankinggui.source;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

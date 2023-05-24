@@ -1,4 +1,4 @@
-package asu.onlinebankinggui.source.src;
+package asu.onlinebankinggui.source;
 
 class Item {
     public final String name;

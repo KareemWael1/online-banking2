@@ -16,4 +16,5 @@ module asu.onlinebankinggui {
     exports asu.onlinebankinggui;
     exports asu.onlinebankinggui.Controllers;
     opens asu.onlinebankinggui.Controllers to javafx.fxml;
+    opens asu.onlinebankinggui.source to javafx.base;
 }
