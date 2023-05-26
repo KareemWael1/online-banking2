@@ -1,5 +1,7 @@
 package asu.onlinebankinggui.source;
 
+import asu.onlinebankinggui.DataClasses.AccountData;
+
 import java.util.ArrayList;
 
 class Account {
@@ -7,16 +9,21 @@ class Account {
     private static int number_counter = 0;
     private final int number;
     private float balance;
+    private final String currency;
+    private final String type;
     private final ArrayList<Transaction> transactions = new ArrayList<>();
     private final User user;
 
     // Constructor
-    Account(User user) {
+    Account(User user, String type, String currency) {
         number = number_counter++;
         balance = 0;
         this.user = user;
+        this.type = type;
+        this.currency = currency;
         accounts.add(this);
     }
+
 
     // Static functions
     static Account getAccountByNumber(int number) {
@@ -25,6 +32,8 @@ class Account {
                 return account;
         return null;
     }
+
+
 
     // Money functions
     public void deposit(float amount) {
@@ -69,6 +78,22 @@ class Account {
     public int getNumber() {
         return number;
     }
+    public String getType() {
+        return type;
+    }
+    public String getCurrency() {
+        return currency;
+    }
+
+    public AccountData getData() {
+        return new AccountData(
+                number,
+                balance,
+                currency,
+                type
+        );
+    }
+
 
     // Function that returns an ArrayList of all the account numbers
     public static ArrayList<Integer> getAccountNumbers() {

@@ -33,11 +33,11 @@ class User {
 
         return false;
     }
-    public boolean createAccount() {
+    public boolean createAccount(String type, String currency) {
         if (!loggedIn)
             return false;
 
-        Account account = new Account(this);
+        Account account = new Account(this, type, currency);
         accounts.add(account);
         notifications.add(
                 new Notification("Account with number " + account.getNumber() + " was created")

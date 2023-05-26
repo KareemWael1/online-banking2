@@ -1,6 +1,8 @@
-package source;
+package asu.onlinebankinggui.source;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import asu.onlinebankinggui.source.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

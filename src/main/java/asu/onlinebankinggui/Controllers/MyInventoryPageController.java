@@ -1,6 +1,7 @@
 package asu.onlinebankinggui.Controllers;
 
-import asu.onlinebankinggui.StupDataClassses.InventoryData;
+import asu.onlinebankinggui.DataClasses.InventoryData;
+import asu.onlinebankinggui.DataClasses.InventoryData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
