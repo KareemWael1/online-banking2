@@ -3,10 +3,11 @@ package asu.onlinebankinggui.source;
 import asu.onlinebankinggui.DataClasses.AccountData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class Account {
     private static final ArrayList<Account> accounts = new ArrayList<>();
-    private static int number_counter = 0;
+    private static int counter = 0;
     private final int number;
     private float balance;
     private final String currency;
@@ -15,12 +16,18 @@ class Account {
     private final User user;
 
     // Constructor
-    Account(User user, String type, String currency) {
-        number = number_counter++;
+    Account(User user, String currency, String type) {
+        number = counter++;
         balance = 0;
         this.user = user;
-        this.type = type;
+        if (!currency.equals("EGP") && !currency.equals("USD"))
+            throw new IllegalArgumentException(String.format("Currency must be EGP or USD not %s", currency));
+
+        if (!type.equals("Checking") && !type.equals("Savings"))
+            throw new IllegalArgumentException(String.format("Type must be Checking or Savings not %s", type));
+
         this.currency = currency;
+        this.type = type;
         accounts.add(this);
     }
 
@@ -40,26 +47,26 @@ class Account {
         balance += amount;
     }
     public boolean withdraw(float amount) {
-        float new_balance = balance - amount;
-        if (new_balance < 0) {
+        float newBalance = balance - amount;
+        if (newBalance < 0) {
             return false;
         }
 
-        balance = new_balance;
+        balance = newBalance;
         return true;
     }
 
     // Transaction functions
-    public void transact(float amount, int other_account_number) {
-        Account other = getAccountByNumber(other_account_number);
+    public void transact(float amount, int otherAccountNumber) {
+        Account other = getAccountByNumber(otherAccountNumber);
         if (other == null)
-            throw new IllegalArgumentException("Account with number " + other_account_number + " does not exist");
+            throw new IllegalArgumentException(String.format("Account with number %d does not exist", otherAccountNumber));
 
-        transactions.add(new Transaction(amount, this.getNumber(), other_account_number));
+        transactions.add(new Transaction(amount, this.getNumber(), otherAccountNumber));
     }
-    public void transact(float amount, String name) {
+    public void transact(String name) {
         if (!Shop.itemExisted(name))
-            throw new IllegalArgumentException("Item with name " + name + " does not exist");
+            throw new IllegalArgumentException(String.format("Item with name %s does not exist", name));
 
         transactions.add(new Transaction(this.getNumber(), name));
     }
@@ -69,7 +76,7 @@ class Account {
     public float getBalance() {
         return balance;
     }
-    public ArrayList<Transaction> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
     public String getUsername() {
@@ -87,19 +94,11 @@ class Account {
 
     public AccountData getData() {
         return new AccountData(
+                user.getUsername(),
                 number,
                 balance,
-                currency,
-                type
+                type,
+                currency
         );
-    }
-
-
-    // Function that returns an ArrayList of all the account numbers
-    public static ArrayList<Integer> getAccountNumbers() {
-        ArrayList<Integer> account_numbers = new ArrayList<>();
-        for(Account account : accounts)
-            account_numbers.add(account.getNumber());
-        return account_numbers;
     }
 }

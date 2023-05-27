@@ -1,6 +1,6 @@
 package asu.onlinebankinggui.DataClasses;
 
-public record AccountData(int number, float balance, String type, String currency){
+public record AccountData(String username, int number, float balance, String type, String currency) {
     public int getNumber() {
         return number;
     }
@@ -12,5 +12,8 @@ public record AccountData(int number, float balance, String type, String currenc
     }
     public String getCurrency() {
         return currency;
+    }
+    public String getUsername() {
+        return username;
     }
 }
