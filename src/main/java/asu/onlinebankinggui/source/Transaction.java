@@ -11,8 +11,9 @@ class Transaction {
     private String item;
 
     public Transaction(float amount, int fromAccount) {
-        if (!Account.getAccountNumbers().contains(fromAccount))
-            throw new IllegalArgumentException("Account with number " + fromAccount + " does not exist");
+        // TODO Add getAccountNumbers() Method
+        // if (!Account.getAccountNumbers().contains(fromAccount))
+        //    throw new IllegalArgumentException("Account with number " + fromAccount + " does not exist");
         this.amount = amount;
         this.fromAccountNumber = fromAccount;
         this.date = LocalDateTime.now();

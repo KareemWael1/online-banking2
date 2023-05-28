@@ -1,8 +1,7 @@
 package asu.onlinebankinggui.Controllers;
 
 
-import asu.onlinebankinggui.source.Account;
-import asu.onlinebankinggui.source.User;
+import asu.onlinebankinggui.DataClasses.AccountData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,40 +16,37 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static asu.onlinebankinggui.Controllers.ControllerUtility.account;
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
+import static asu.onlinebankinggui.DataClasses.DataClassStub.AccountsStub;
 
 public class MyAccountsPageController implements Initializable{
     @FXML
-    private TableView<Account> accounts;
+    private TableView<AccountData> accounts;
 
     @FXML
-    private TableColumn<Account, Integer> accountNumber;
+    private TableColumn<AccountData, Integer> accountNumber;
     @FXML
-    private TableColumn<Account, Double> Balance;
+    private TableColumn<AccountData, Double> Balance;
     @FXML
-    private TableColumn<Account, String> type;
+    private TableColumn<AccountData, Double> currency;
+    @FXML
+    private TableColumn<AccountData, String> type;
 
     @FXML
     private Label select;
 
-    ObservableList<Account> accountsData;
+    ObservableList<AccountData> accountsData;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        accountsData = getAccountsStub();
+        accountsData = FXCollections.observableList(AccountsStub());
         accountNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
         Balance.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        currency.setCellValueFactory(new PropertyValueFactory<>("currency"));
         type.setCellValueFactory(new PropertyValueFactory<>("type"));
 
-        accounts.setItems(getAccountsStub());
-    }
-
-    public ObservableList<Account> getAccountsStub(){
-        ArrayList<Account> accountsArray = new ArrayList<>();
-        accountsArray.add(new Account(new User("Kareem", "Kimo", "123"), "Saving"));
-        accountsArray.add(new Account(new User("Kareem", "Kimo", "123"), "Checking"));
-        accountsArray.add(new Account(new User("Kareem", "Kimo", "123"), "Saving"));
-        return FXCollections.observableList(accountsArray);
+        accounts.setItems(accountsData);
     }
 
     @FXML
@@ -59,26 +55,15 @@ public class MyAccountsPageController implements Initializable{
     }
 
     @FXML
-    protected void onDeleteAccountButtonClick() throws IOException {
-        Account deletedAccount = accounts.getSelectionModel().getSelectedItem();
-        if(deletedAccount == null){
-            select.setVisible(true);
-            select.setText("Please select an account to delete");
-            return;
-        }
-        // TODO call destructor of Account to delete deletedAccount
-        changeScene("MyAccountsPage.fxml");
-    }
-
-    @FXML
-    protected void onOpenAccountButtonClick() throws IOException {
-        Account openedAccount = accounts.getSelectionModel().getSelectedItem();
-        if(openedAccount == null){
+    protected void onSelectAccountButtonClick() throws IOException {
+        AccountData selectedAccount = accounts.getSelectionModel().getSelectedItem();
+        if(selectedAccount == null){
             select.setVisible(true);
             select.setText("Please select an account to open");
             return;
         }
-        // TODO add fxml for AccountMenuPage
+        account = selectedAccount;
+        changeScene("AccountMenuPage.fxml");
     }
 
     @FXML

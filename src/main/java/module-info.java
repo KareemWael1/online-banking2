@@ -12,11 +12,9 @@ module asu.onlinebankinggui {
     requires org.junit.jupiter.api;
 
     opens asu.onlinebankinggui to javafx.fxml;
-    opens asu.onlinebankinggui.source.src to javafx.base;
-    opens asu.onlinebankinggui.StupDataClassses to javafx.base;
+    opens asu.onlinebankinggui.source to javafx.base;
+    opens asu.onlinebankinggui.DataClasses to javafx.base;
     exports asu.onlinebankinggui;
     exports asu.onlinebankinggui.Controllers;
     opens asu.onlinebankinggui.Controllers to javafx.fxml;
-    opens asu.onlinebankinggui.source to javafx.base;
-    opens asu.onlinebankinggui.DataClasses to javafx.base;
 }

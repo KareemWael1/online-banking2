@@ -2,26 +2,23 @@ package asu.onlinebankinggui.DataClasses;
 
 import java.time.LocalDateTime;
 
-public record TransactionData(float amount, int toAccount, int fromAccountNumber, boolean isToItem, String item,
-                              LocalDateTime date) {
+public record TransactionData(int id, float amount, String currency, String type, int fromAccountNumber, LocalDateTime date) {
+    public int getId(){
+        return id;
+    }
     public float getAmount(){
 
         return amount;
     }
-    public int getToAccount(){
-
-        return toAccount;
+    public String getType(){
+        return type;
     }
-    public int getFromAccountNumber(){
+    public String getCurrency(){
+        return currency;
+    }
+    public int getFromAccountNumber() {
 
         return fromAccountNumber;
-    }
-    public boolean getIsToItem(){
-        return isToItem;
-    }
-    public String getItem(){
-
-        return item;
     }
     public LocalDateTime getDate(){
         return date;

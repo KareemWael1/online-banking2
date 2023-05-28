@@ -24,8 +24,9 @@ public class CreateAccountPageController implements Initializable {
     }
 
     @FXML
-    protected void onCreateAccountButtonClick() {
+    protected void onCreateAccountButtonClick() throws IOException {
         // TODO: Call Account() from backend
+        changeScene("MyAccountsPage.fxml");
     }
 
     @FXML

@@ -24,6 +24,6 @@ public class WelcomePageController {
 
     @FXML
     protected void onTest() throws IOException{
-        changeScene("MyInventoryPage.fxml");
+        changeScene("MainMenuPage.fxml");
     }
 }

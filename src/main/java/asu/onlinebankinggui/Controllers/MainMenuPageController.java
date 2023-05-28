@@ -28,21 +28,22 @@ public class MainMenuPageController implements Initializable {
 
     @FXML
     protected void onInventoryButtonClick() throws IOException {
-        // TODO Add inventory fxml
+        changeScene("MyInventoryPage.fxml");
     }
 
     @FXML
     protected void onBillsButtonClick() throws IOException {
-        // TODO Add bills fxml
+        changeScene("MyBillsPage.fxml");
     }
 
     @FXML
     protected void onNotificationsButtonClick() throws IOException {
-        // TODO Add notification fxml
+        changeScene("MyNotificationsPage.fxml");
     }
 
     @FXML
     protected void onLogoutButtonClick() throws IOException {
         // TODO Add logout()
+        changeScene("WelcomePage.fxml");
     }
 }

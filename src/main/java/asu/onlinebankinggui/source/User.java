@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-class User {
+public class User {
     private final String name;
     private final String username;
     private final String password;
@@ -217,7 +217,7 @@ class User {
         // 4. Return null if the user is not logged in or is not using an account.
          if (!loggedIn || account == null)
              return null;
-         return account.getTransactions();
+         return (ArrayList<Transaction>) account.getTransactions();
     }
     public ArrayList<Notification> getNotifications() {
         return notifications;

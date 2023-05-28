@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
+import static asu.onlinebankinggui.DataClasses.DataClassStub.InventoryStub;
 
 public class MyInventoryPageController implements Initializable {
     @FXML
@@ -34,14 +35,6 @@ public class MyInventoryPageController implements Initializable {
         count.setCellValueFactory(new PropertyValueFactory<InventoryData, Integer>("count"));
 
         items.setItems(inventoryData);
-    }
-
-    private ArrayList<InventoryData> InventoryStub(){
-        ArrayList<InventoryData> returnValue = new ArrayList<>();
-        returnValue.add(new InventoryData("xxx", 2));
-        returnValue.add(new InventoryData("yyy", 1));
-        returnValue.add(new InventoryData("zzz", 10));
-        return returnValue;
     }
 
     @FXML

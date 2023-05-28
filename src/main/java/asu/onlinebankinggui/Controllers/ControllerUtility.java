@@ -1,5 +1,6 @@
 package asu.onlinebankinggui.Controllers;
 
+import asu.onlinebankinggui.DataClasses.AccountData;
 import asu.onlinebankinggui.OnlineBankingSystem;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ControllerUtility {
+    public static AccountData account;
+
     public static void changeScene(String fxmlFile) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(OnlineBankingSystem.class.getResource(fxmlFile));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);

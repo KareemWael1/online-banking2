@@ -16,6 +16,7 @@ public class OnlineBankingSystem extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         stage.setTitle("Online Banking System");
         stage.setScene(scene);
+        stage.setResizable(false);
         OnlineBankingSystem.stage = stage;
         stage.show();
     }
