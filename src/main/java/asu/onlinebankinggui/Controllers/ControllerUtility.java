@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,6 +32,8 @@ public class ControllerUtility {
         dialogPane.getStyleClass().add("dialog-pane");
         alert.getDialogPane().lookupButton(ButtonType.YES).setId("yes");
         alert.getDialogPane().lookupButton(ButtonType.CANCEL).setId("cancel");
+        Stage stage = (Stage) dialogPane.getScene().getWindow();
+        stage.getIcons().add(new Image(Objects.requireNonNull(OnlineBankingSystem.class.getResourceAsStream("/asu/onlinebankinggui/images/BankIcon.png"))));
         alert.showAndWait();
         return alert.getResult();
     }

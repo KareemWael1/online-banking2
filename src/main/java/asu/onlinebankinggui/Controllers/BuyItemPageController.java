@@ -45,7 +45,7 @@ public class BuyItemPageController implements Initializable {
     }
 
     @FXML
-    protected void onPayBillButtonClicked() throws IOException {
+    protected void onBuyItemButtonClicked() throws IOException {
         if(items.getSelectionModel().getSelectedItem() == null){
             error.setText("Please select an item to buy");
             error.setVisible(true);
