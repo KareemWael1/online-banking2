@@ -1,13 +1,10 @@
 package asu.onlinebankinggui.DataClasses;
 
-public record BillsData(String bill, String price) {
+public record BillsData(String bill, float price) {
     public String getBill(){
         return bill;
     }
-    // public int getItem(){
-    //    return item;
-    //}
-    public String getPrice(){
+    public float getPrice(){
         return price;
     }
 }

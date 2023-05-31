@@ -37,18 +37,17 @@ public class AccountMenuPageController implements Initializable {
 
     @FXML
     protected void onTransferButtonClick() throws IOException {
-        // TODO add Transfer fxml
+        changeScene("TransferPage.fxml");
     }
 
     @FXML
     protected void onBuyItemButtonClick() throws IOException {
-        // TODO add BuyItem fxml
+        changeScene("BuyItemPage.fxml");
     }
 
     @FXML
     protected void onPayBillButtonClick() throws IOException {
-        // TODO add PayBill fxml
-    }
+        changeScene("PayBillPage.fxml");    }
 
     @FXML
     protected void onTransactionsButtonClick() throws IOException {

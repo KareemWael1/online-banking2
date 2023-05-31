@@ -4,9 +4,13 @@ import asu.onlinebankinggui.DataClasses.AccountData;
 import asu.onlinebankinggui.OnlineBankingSystem;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ControllerUtility {
     public static AccountData account;
@@ -17,5 +21,17 @@ public class ControllerUtility {
         Stage stage = OnlineBankingSystem.getStage();
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static ButtonType confirmation(String text){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, text, ButtonType.YES, ButtonType.CANCEL);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                Objects.requireNonNull(ControllerUtility.class.getResource("/asu/onlinebankinggui/css/main.css")).toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
+        alert.getDialogPane().lookupButton(ButtonType.YES).setId("yes");
+        alert.getDialogPane().lookupButton(ButtonType.CANCEL).setId("cancel");
+        alert.showAndWait();
+        return alert.getResult();
     }
 }

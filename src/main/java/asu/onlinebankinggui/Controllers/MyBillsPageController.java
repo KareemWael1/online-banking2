@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static asu.onlinebankinggui.Controllers.ControllerUtility.account;
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
 import static asu.onlinebankinggui.DataClasses.DataClassStub.BillsStub;
 import static asu.onlinebankinggui.DataClasses.DataClassStub.InventoryStub;
@@ -30,6 +31,7 @@ public class MyBillsPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        price.setText("Price (in " + account.currency() + ")");
         ObservableList<BillsData> billsData = FXCollections.observableList(BillsStub());
         bill.setCellValueFactory(new PropertyValueFactory<BillsData, String>("bill"));
         price.setCellValueFactory(new PropertyValueFactory<BillsData, String>("price"));

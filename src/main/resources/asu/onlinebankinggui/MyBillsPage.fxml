@@ -17,7 +17,7 @@
         <TableView fx:id="bills" layoutX="250.0" layoutY="150.0" prefHeight="300.0" prefWidth="300.0" stylesheets="@css/main.css">
             <columns>
                 <TableColumn fx:id="bill" prefWidth="144.79998779296875" styleClass="table" text="Bill" />
-                <TableColumn fx:id="price" minWidth="104.00006103515625" prefWidth="152.800048828125" styleClass="table" text="Price" />
+                <TableColumn fx:id="price" minWidth="104.00006103515625" prefWidth="152.800048828125" styleClass="table" text="Price (in Currency)" />
             </columns>
         </TableView>
         <Button layoutX="332.0" layoutY="496.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="41.0" prefWidth="135.0" styleClass="back_button" text="Back">

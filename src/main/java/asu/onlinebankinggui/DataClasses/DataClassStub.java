@@ -30,15 +30,15 @@ public class DataClassStub {
         ArrayList<NotificationData> notificationData = new ArrayList<>();
         notificationData.add(new NotificationData("Bill#313 with total 500EGP demands Payment", LocalDateTime.of(2020, Month.JANUARY, 1, 10, 10, 30)));
         notificationData.add(new NotificationData("Bill#313 is paid successfully", LocalDateTime.of(2020, Month.FEBRUARY, 15, 22, 35, 12)));
-        notificationData.add(new NotificationData("An amount of 1000EGP Transfered to your account", LocalDateTime.of(2022, Month.JULY, 3, 12, 0, 0)));
+        notificationData.add(new NotificationData("An amount of 1000EGP Transferred to your account", LocalDateTime.of(2022, Month.JULY, 3, 12, 0, 0)));
         return notificationData;
     }
 
     public static ArrayList<BillsData> BillsStub(){
         ArrayList<BillsData> returnValue = new ArrayList<>();
-        returnValue.add(new BillsData("Bill#313", "500 EGP"));
-        returnValue.add(new BillsData("Bill#505", "2000 EGP"));
-        returnValue.add(new BillsData("Bill#1001", "100 USD"));
+        returnValue.add(new BillsData("Bill#313", 500));
+        returnValue.add(new BillsData("Bill#505", 2000));
+        returnValue.add(new BillsData("Bill#1001", 100));
         return returnValue;
     }
 
@@ -50,4 +50,11 @@ public class DataClassStub {
         return transactionData;
     }
 
+    public static ArrayList<ItemsData> getAvailableItems(){
+        ArrayList<ItemsData> items = new ArrayList<>();
+        items.add(new ItemsData("xxx", 250));
+        items.add(new ItemsData("yyy", 1000));
+        items.add(new ItemsData("zzz", 49.99f));
+        return items;
+    }
 }

@@ -65,3 +65,27 @@ table-view:focused .table-row-cell:focused {
 .label{
     -fx-font-size: 28;
 }
+
+.price{
+    -fx-opacity: 1.0;
+}
+
+.dialog-pane > .content.label {
+    -fx-font-family: 'PT Sans Narrow', sans-serif;
+    -fx-font-size: 18;
+    -fx-focus-color: transparent;
+}
+
+#yes{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+}
+
+#cancel{
+    -fx-background-color:white;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
