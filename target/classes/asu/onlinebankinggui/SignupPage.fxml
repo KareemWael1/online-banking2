@@ -21,18 +21,22 @@
                 <Font name="Dubai Regular" size="14.0" />
             </font>
         </Button>
-        <Button fx:id="cancel" layoutX="425.0" layoutY="450.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="41.0" prefWidth="94.0" styleClass="back_button" text="Cancel" textAlignment="CENTER">
+        <Button layoutX="425.0" layoutY="450.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="41.0" prefWidth="94.0" styleClass="back_button" text="Cancel" textAlignment="CENTER">
             <font>
                 <Font name="PT Bold Heading" size="14.0" />
             </font>
         </Button>
-        <Label layoutX="225.0" layoutY="350.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Email" />
+        <Label layoutX="225.0" layoutY="350.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Username" />
         <Label layoutX="225.0" layoutY="400.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Password" />
-        <TextField fx:id="email" layoutX="326.0" layoutY="350.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
+        <TextField fx:id="username" layoutX="326.0" layoutY="350.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
         <PasswordField fx:id="password" layoutX="326.0" layoutY="400.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
         <Label layoutX="225.0" layoutY="250.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="First Name" />
         <Label layoutX="225.0" layoutY="300.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Last Name" />
         <TextField fx:id="lastName" layoutX="325.0" layoutY="300.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
         <TextField fx:id="firstName" layoutX="325.0" layoutY="250.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
+      <Label fx:id="firstNameError" layoutX="565.0" layoutY="251.0" maxWidth="206.0" minWidth="100.0" prefHeight="27.0" prefWidth="206.0" text="First Name is empty" textFill="RED" visible="false" />
+      <Label fx:id="lastNameError" layoutX="565.0" layoutY="300.0" maxWidth="206.0" minWidth="100.0" prefHeight="27.0" prefWidth="206.0" text="Last Name is empty" textFill="RED" visible="false" />
+      <Label fx:id="UsernameError" layoutX="565.0" layoutY="351.0" maxWidth="206.0" minWidth="100.0" prefHeight="27.0" prefWidth="206.0" text="Username is empty" textFill="RED" visible="false" />
+      <Label fx:id="passwordError" layoutX="565.0" layoutY="400.0" maxWidth="206.0" minWidth="100.0" prefHeight="27.0" prefWidth="206.0" text="Password is empty" textFill="RED" visible="false" />
     </children>
 </AnchorPane>
