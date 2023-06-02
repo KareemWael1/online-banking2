@@ -1,10 +1,13 @@
 package asu.onlinebankinggui.DataClasses;
 
-public record InventoryData(String itemName,int count) {
-    public String getItemName(){
-        return itemName;
+public record InventoryData(
+        String item,
+        int count
+) {
+    public String getItem() {
+        return item;
     }
-    public int getCount(){
+    public int getCount() {
         return count;
     }
 }
