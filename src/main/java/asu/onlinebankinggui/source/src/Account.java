@@ -1,9 +1,9 @@
-package asu.onlinebankinggui.source;
-
-import asu.onlinebankinggui.DataClasses.AccountData;
+package asu.onlinebankinggui.source.src;
 
 import java.util.ArrayList;
 import java.util.List;
+import asu.onlinebankinggui.DataClasses.AccountData;
+import asu.onlinebankinggui.DataClasses.*;
 
 class Account {
     private static final ArrayList<Account> accounts = new ArrayList<>();
@@ -13,7 +13,9 @@ class Account {
     private final String currency;
     private final String type;
     private final ArrayList<Transaction> transactions = new ArrayList<>();
+    private final ArrayList<Bill> bills = new ArrayList<>();
     private final User user;
+
 
     // Constructor
     Account(User user, String currency, String type) {
@@ -33,13 +35,12 @@ class Account {
 
 
     // Static functions
-    static Account getAccountByNumber(int number) {
+    public static Account getAccountByNumber(int number) {
         for(Account account : accounts)
             if (account.getNumber() == number)
                 return account;
         return null;
     }
-
 
 
     // Money functions
@@ -56,6 +57,7 @@ class Account {
         return true;
     }
 
+
     // Transaction functions
     public void transact(float amount, int otherAccountNumber) {
         Account other = getAccountByNumber(otherAccountNumber);
@@ -64,7 +66,7 @@ class Account {
 
         transactions.add(new Transaction(amount, this.getNumber(), otherAccountNumber));
     }
-    public void transact(float price, String name) {
+    public void transact(String name) {
         if (!Shop.itemExisted(name))
             throw new IllegalArgumentException(String.format("Item with name %s does not exist", name));
 
@@ -91,13 +93,57 @@ class Account {
     public String getCurrency() {
         return currency;
     }
-
     public AccountData getData() {
         return new AccountData(
                 number,
                 balance,
-                type,
-                currency
+                currency,
+                type
         );
+    }
+    public void addBill(Bill bill) {
+        bills.add(bill);
+    }
+    public boolean hasBill(String name) {
+        for (Bill bill : bills)
+            if (bill.getName().equals(name))
+                return true;
+        return false;
+    }
+    public boolean hasUnpaidBill(String name) {
+        if (!hasBill(name))
+            return false;
+
+        for (Bill bill : bills)
+            if (bill.getName().equals(name))
+                return !bill.getIsPaid();
+        return false;
+    }
+    public boolean payBill(String name) {
+        if (!hasBill(name))
+            throw new IllegalArgumentException(String.format("Bill with name %s does not exist", name));
+
+        if (!hasUnpaidBill(name))
+            throw new IllegalArgumentException(String.format("Bill with name %s is already paid", name));
+
+
+        for (Bill bill : bills)
+            if (bill.getName().equals(name)) {
+                bill.pay();
+                return true;
+            }
+        return false;
+    }
+    public List<Bill> getBills() {
+        return bills;
+    }
+
+
+    // Data getter
+    public List<BillData> getBillsData() {
+        return bills
+                .stream()
+                .map(Bill::getData)
+                .toList();
     }
 }

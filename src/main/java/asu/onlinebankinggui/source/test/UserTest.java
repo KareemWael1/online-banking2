@@ -1,7 +1,9 @@
-package asu.onlinebankinggui.source;
+package asu.onlinebankinggui.source.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import asu.onlinebankinggui.source.src.Shop;
+import asu.onlinebankinggui.source.src.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -83,7 +85,7 @@ class UserTest {
         // 5. Try to buy item
         // 6. Deposit money
 
-        Shop.addItem("cola", 3, 1, "ITEM");
+        Shop.addItem("cola", 3);
 
         user.login(USERNAME, PASSWORD);
 
@@ -96,12 +98,12 @@ class UserTest {
 
         user.deposit(323);
         assertTrue(user.buy("cola"));
-        assertEquals(1, user.hasHowMany("cola"));
+        assertEquals(1, user.hasHowManyItems("cola"));
         assertTrue(user.buy("cola"));
         assertTrue(user.buy("cola"));
         assertFalse(user.buy("cola"));
-        assertEquals(3, user.hasHowMany("cola"));
-        assertEquals(0, user.hasHowMany("pepsi"));
+        assertEquals(3, user.hasHowManyItems("cola"));
+        assertEquals(0, user.hasHowManyItems("pepsi"));
     }
 
     @Test

@@ -1,8 +1,9 @@
-package asu.onlinebankinggui.source;
+package asu.onlinebankinggui.source.src;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-class Helpers {
+public class Helpers {
+    private Helpers() {} // Prevent instantiation of this class
     public static String getHash(String input) {
         // This function was obtained from:
         // https://www.geeksforgeeks.org/md5-hash-in-java/
@@ -19,5 +20,15 @@ class Helpers {
             e.printStackTrace();
             return null;
         }
+    }
+    public static float convert(String fromCurrency, String toCurrency, float amount) {
+        float factor = 40f;
+
+        if (fromCurrency.equals("EGP") && toCurrency.equals("USD"))
+            return amount / factor;
+        else if (fromCurrency.equals("USD") && toCurrency.equals("EGP"))
+            return amount * factor;
+
+        return amount;
     }
 }

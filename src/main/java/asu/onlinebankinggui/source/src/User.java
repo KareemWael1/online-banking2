@@ -1,10 +1,10 @@
-package asu.onlinebankinggui.source;
+package asu.onlinebankinggui.source.src;
+import asu.onlinebankinggui.DataClasses.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class User {
+    public static final String ERROR_NOT_USING_ACCOUNT = "You are not currently using an account";
     private final String name;
     private final String username;
     private final String password;
@@ -12,13 +12,22 @@ public class User {
     private final ArrayList<Notification> notifications = new ArrayList<>();
     private Account account = null;
     private boolean loggedIn = false;
-    private static final Map<String, Integer> inventory = new HashMap<>();
+    private final Map<String, Integer> itemsInventory = new HashMap<>();
+    private static final ArrayList<User> users = new ArrayList<>();
 
     // Constructor
     public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = Helpers.getHash(password);
+    }
+
+    // Get User
+    public static User getUser(String username) {
+        for(User user : users)
+            if (user.getUsername().equals(username))
+                return user;
+        return null;
     }
 
     // User functions
@@ -33,21 +42,27 @@ public class User {
 
         return false;
     }
-    public boolean createAccount(String type, String currency) {
+    public boolean createAccount(String currency, String type) {
         if (!loggedIn)
             return false;
 
-        Account account = new Account(this, type, currency);
-        accounts.add(account);
+        if (!currency.equals("EGP") && !currency.equals("USD"))
+            return false;
+
+        if (!type.equals("Checking") && !type.equals("Savings"))
+            return false;
+
+        Account createdAccount = new Account(this, currency, type);
+        accounts.add(createdAccount);
         notifications.add(
-                new Notification("Account with number " + account.getNumber() + " was created")
+                new Notification("Account with number " + createdAccount.getNumber() + " was created")
         );
         return true;
     }
     public boolean useAccount(int number) {
         if (!loggedIn)
             return false;
-        
+
         for(Account curr_account : accounts)
             if (curr_account.getNumber() == number) {
                 account = curr_account;
@@ -68,7 +83,7 @@ public class User {
         // 3. Check if the item exists.
         // 4. Check if the user has enough money.
         // 5. Withdraw money from the user's account.
-        // 6. Add the item to the user's inventory.
+        // 6. Add the item to the user's itemsInventory.
         // 7. Add a notification to the user.
         // 8. Return true if the item was bought successfully.
         // 9. Return false if the item was not bought successfully.
@@ -76,44 +91,53 @@ public class User {
 
         if (account == null) {
             notifications.add(
-                    new Notification("You are not currently using an account")
+                    new Notification(ERROR_NOT_USING_ACCOUNT)
             );
             return false;
         }
-
-        if (!Shop.hasItem(name)) {
+        boolean hasBill = Shop.hasBill(name) && account.hasBill(name);
+        boolean hasItem = Shop.hasItem(name);
+        if (!hasBill && !hasItem) {
             notifications.add(
-                    new Notification("Item with name " + name + " does not exist")
+                    new Notification("Buyable with name " + name + " does not exist")
             );
             return false;
         }
 
-        float price = Shop.getPrice(name);
+        float price;
+        if (hasBill) {
+            price = Shop.getBillPrice(name);
+        } else {
+            price = Shop.getItemPrice(name);
+        }
 
-        if (price > account.getBalance()) {
+        float balanceInEGP = Helpers.convert(account.getCurrency(), "EGP", account.getBalance());
+        float priceInAccountCurrency = Helpers.convert("EGP", account.getCurrency(), price);
+
+        if (price > balanceInEGP) {
             notifications.add(
                     new Notification("You don't have enough money to buy " + name)
             );
             return false;
         }
 
-        if (!account.withdraw(price)) {
+        if (!account.withdraw(priceInAccountCurrency)) {
             notifications.add(
-                    new Notification("Could not withdraw " + price + " from your account")
+                    new Notification("Could not withdraw " + priceInAccountCurrency + " " +  account.getCurrency() + " from your account")
             );
             return false;
         }
 
-        if (!Shop.sellItem(name)) {
-            notifications.add(
-                    new Notification("Shop could not sell " + name)
-            );
+        if (!(hasBill ? Shop.payBill(name) : Shop.sellItem(name))) {
+            notifications.add(new Notification("Shop could not sell " + name));
             return false;
         }
-        inventory.put(name, inventory.getOrDefault(name, 0) + 1);
 
-        account.transact(price, name);
-        notifications.add(new Notification("You bought " + name + " for " + price));
+        if (hasItem)
+            itemsInventory.put(name, itemsInventory.getOrDefault(name, 0) + 1);
+
+        account.transact(name);
+        notifications.add(new Notification("You bought " + name + " for " + priceInAccountCurrency + " " + account.getCurrency()));
 
         return true;
     }
@@ -132,16 +156,16 @@ public class User {
 
         if (account == null) {
             notifications.add(
-                    new Notification("You are not currently using an account")
+                    new Notification(ERROR_NOT_USING_ACCOUNT)
             );
             return false;
         }
 
         if (amount < 0) throw new IllegalArgumentException("Amount must be positive");
 
-        Account to_account = Account.getAccountByNumber(toAccountNumber);
+        Account toAcc = Account.getAccountByNumber(toAccountNumber);
 
-        if (to_account == null) {
+        if (toAcc == null) {
             notifications.add(
                     new Notification("source.src.Account with number " + toAccountNumber + " does not exist")
             );
@@ -150,15 +174,15 @@ public class User {
 
         if (amount > account.getBalance()) {
             notifications.add(
-                    new Notification("You don't have enough money to transfer " + amount + " to " + to_account.getUsername())
+                    new Notification("You don't have enough money to transfer " + amount + " to " + toAcc.getUsername())
             );
             return false;
         }
 
         if (account.withdraw(amount)) {
-            to_account.deposit(amount);
+            toAcc.deposit(Helpers.convert(account.getCurrency(), toAcc.getCurrency(), amount));
             notifications.add(
-                    new Notification("You transferred " + amount + " to " + to_account.getUsername())
+                    new Notification("You transferred " + amount + " to " + toAcc.getUsername())
             );
 
             account.transact(amount, account.getNumber());
@@ -183,7 +207,7 @@ public class User {
 
         if (account == null) {
             notifications.add(
-                    new Notification("You are not currently using an account")
+                    new Notification(ERROR_NOT_USING_ACCOUNT)
             );
             return false;
         }
@@ -199,6 +223,33 @@ public class User {
 
         return true;
     }
+    public boolean withdraw(float amount) {
+        if (!loggedIn) return false;
+
+        if (account == null) {
+            notifications.add(
+                    new Notification(ERROR_NOT_USING_ACCOUNT)
+            );
+            return false;
+        }
+
+        if (amount < 0) throw new IllegalArgumentException("Amount must be positive");
+
+        if (account.withdraw(amount)) {
+            notifications.add(
+                    new Notification("You withdrew " + amount + " from your account")
+            );
+
+            account.transact(amount, account.getNumber());
+
+            return true;
+        } else {
+            notifications.add(
+                    new Notification("Could not withdraw " + amount + " from your account")
+            );
+            return false;
+        }
+    }
     public float getBalance() {
         // 1. Check if the user is logged in.
         // 2. Check if the user is using an account.
@@ -210,16 +261,16 @@ public class User {
     }
 
     // Getters
-    public ArrayList<Transaction> viewTransactions() {
+    public List<Transaction> viewTransactions() {
         // 1. Check if the user is logged in.
         // 2. Check if the user is using an account.
         // 3. Return the transactions of the user's account.
         // 4. Return null if the user is not logged in or is not using an account.
-         if (!loggedIn || account == null)
-             return null;
-         return (ArrayList<Transaction>) account.getTransactions();
+        if (!loggedIn || account == null)
+            return Collections.emptyList();
+        return account.getTransactions();
     }
-    public ArrayList<Notification> getNotifications() {
+    public List<Notification> getNotifications() {
         return notifications;
     }
     public String getName() {
@@ -231,14 +282,68 @@ public class User {
     public String getUsername() {
         return username;
     }
-    public int hasHowMany(String name) {
-        return inventory.getOrDefault(name, 0);
+    public int hasHowManyItems(String name) {
+        return itemsInventory.getOrDefault(name, 0);
     }
-    public ArrayList<Integer> getAccountNums() {
+    public List<Integer> getAccountNums() {
         ArrayList<Integer> accountNums = new ArrayList<>();
-        for (Account account : accounts) {
-            accountNums.add(account.getNumber());
+        for (Account acc : accounts) {
+            accountNums.add(acc.getNumber());
         }
         return accountNums;
     }
+    public List<Bill> getAllBills() {
+        ArrayList<Bill> bills = new ArrayList<>();
+        for (Account acc : accounts) {
+            bills.addAll(acc.getBills());
+        }
+        return bills;
+    }
+    public List<Bill> getBillsByAccount(int accountNumber) {
+        Account acc = Account.getAccountByNumber(accountNumber);
+        if (acc == null)
+            throw new IllegalArgumentException("Account with number " + accountNumber + " does not exist");
+
+        return acc.getBills();
+    }
+
+    public List<Bill> getBills() {
+        if (!loggedIn || account == null)
+            return Collections.emptyList();
+        return account.getBills();
+    }
+
+
+    // Getters for data
+    public List<AccountData> getAccountsData() {
+        if (!loggedIn) return Collections.emptyList();
+
+        return accounts
+                .stream()
+                .map(Account::getData)
+                .toList();
+    }
+    public List<TransactionData> getTransactionsData() {
+        if (!loggedIn || account == null)
+            return null;
+
+        return account.getTransactions()
+                .stream()
+                .map(Transaction::getData)
+                .toList();
+    }
+    public List<NotificationData> getNotificationsData() {
+        return notifications
+                .stream()
+                .map(Notification::getData)
+                .toList();
+    }
+    public List<InventoryData> getInventoryData() {
+        return itemsInventory
+                .entrySet()
+                .stream()
+                .map(entry -> new InventoryData(entry.getKey(), entry.getValue()))
+                .toList();
+    }
+
 }
