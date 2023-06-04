@@ -1,4 +1,5 @@
 package asu.onlinebankinggui.Controllers;
+import asu.onlinebankinggui.source.src.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,7 +44,10 @@ public class MainMenuPageController implements Initializable {
 
     @FXML
     protected void onLogoutButtonClick() throws IOException {
-        // TODO Add logout()
+        User user = new User("Ziad", "x", "y");
+        assert user.login("x", "y");
+
+        user.logout();
         changeScene("WelcomePage.fxml");
     }
 }

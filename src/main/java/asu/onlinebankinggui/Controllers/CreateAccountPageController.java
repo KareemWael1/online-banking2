@@ -1,4 +1,5 @@
 package asu.onlinebankinggui.Controllers;
+import asu.onlinebankinggui.source.src.*;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -25,8 +26,16 @@ public class CreateAccountPageController implements Initializable {
 
     @FXML
     protected void onCreateAccountButtonClick() throws IOException {
-        // TODO: Call Account() from backend
-        changeScene("MyAccountsPage.fxml");
+        User user = new User("Ziad", "x", "y");
+        assert user.login("x", "y");
+        assert user.isLoggedIn();
+
+
+        if (user.createAccount(types.getValue(), currencies.getValue())) {
+            changeScene("MyAccountsPage.fxml");
+        } else {
+            // TODO: Show error message
+        }
     }
 
     @FXML

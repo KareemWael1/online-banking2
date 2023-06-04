@@ -1,4 +1,5 @@
 package asu.onlinebankinggui.Controllers;
+import asu.onlinebankinggui.source.src.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -41,8 +42,19 @@ public class LoginPageController {
             emptyPassword.setVisible(false);
         }
 
-        if(valid){
-            // TODO: Call login() from backend
+        if (valid) {
+            User user = User.getUser(username.getText());
+            if (user == null) {
+                // TODO: User doesn't exist
+            } else {
+                if (user.login(username.getText(), password.getText())) {
+                    // TODO: Login successful
+
+                } else {
+                    // ToDo: Incorrect password
+
+                }
+            }
         }
 
     }

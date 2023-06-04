@@ -75,6 +75,14 @@ public class User {
     public void logout() {
         loggedIn = false;
     }
+    public static boolean signUp(String firstName, String lastName, String username, String password) {
+        if (getUser(username) != null)
+            return false;
+
+        User createdUser = new User(firstName + " " + lastName, username, password);
+        users.add(createdUser);
+        return true;
+    }
 
     // Account functions
     public boolean buy(String name) {
@@ -306,7 +314,6 @@ public class User {
 
         return acc.getBills();
     }
-
     public List<Bill> getBills() {
         if (!loggedIn || account == null)
             return Collections.emptyList();
