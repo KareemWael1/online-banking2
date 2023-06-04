@@ -2,6 +2,7 @@ package asu.onlinebankinggui.Controllers;
 
 import asu.onlinebankinggui.DataClasses.BillsData;
 import asu.onlinebankinggui.DataClasses.ItemsData;
+import asu.onlinebankinggui.source.src.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -57,7 +58,17 @@ public class PayBillPageController implements Initializable {
         error.setVisible(false);
 
         if (confirmation("Confirm Payment ? ") == ButtonType.YES) {
-            // TODO call PayBill() from Backend
+            User user = new User("Ziad", "x", "y");
+            assert user.login("x", "y");
+            assert user.isLoggedIn();
+
+            // ToDo: selectedBill should be of class BillData and not BillsData
+            // ToDo: as user.buy(...) takes a bill name string
+            if (user.buy(selectedBill.getName())) {
+                changeScene("AccountMenuPage.fxml");
+            } else {
+                // ToDo: Couldn't buy error
+            }
             changeScene("MyBillsPage.fxml");
         }
 

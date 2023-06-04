@@ -1,4 +1,5 @@
 package asu.onlinebankinggui.Controllers;
+import asu.onlinebankinggui.source.src.*;
 
 
 import asu.onlinebankinggui.DataClasses.AccountData;
@@ -63,7 +64,16 @@ public class MyAccountsPageController implements Initializable{
             return;
         }
         account = selectedAccount;
-        changeScene("AccountMenuPage.fxml");
+
+        User user = new User("Ziad", "x", "y");
+        assert user.login("x", "y");
+        assert user.isLoggedIn();
+
+        if (user.useAccount(selectedAccount.getNumber())) {
+            changeScene("AccountMenuPage.fxml");
+        } else {
+            // ToDo: Show error message
+        }
     }
 
     @FXML

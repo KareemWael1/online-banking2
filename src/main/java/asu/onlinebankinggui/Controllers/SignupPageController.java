@@ -1,4 +1,5 @@
 package asu.onlinebankinggui.Controllers;
+import asu.onlinebankinggui.source.src.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -87,8 +88,12 @@ public class SignupPageController {
             passwordError.setVisible(false);
         }
 
-        if(valid){
-            // TODO: Call signup() from backend
+        if (valid) {
+            if (User.signUp(first, last, userName, pswd)) {
+                // ToDo: Change this to the login page
+            } else {
+                // ToDo: Username already exists
+            }
         }
 
     }

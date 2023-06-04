@@ -1,4 +1,5 @@
 package asu.onlinebankinggui.Controllers;
+import asu.onlinebankinggui.source.src.*;
 
 import asu.onlinebankinggui.DataClasses.AccountData;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
 import static asu.onlinebankinggui.Controllers.ControllerUtility.confirmation;
 import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
 
 public class TransferPageController implements Initializable {
     private AccountData account;
@@ -51,7 +53,18 @@ public class TransferPageController implements Initializable {
         error.setVisible(false);
 
         if (confirmation("Confirm Transfer ? ") == ButtonType.YES) {
-            // TODO call Transfer() from Backend
+            User.signUp("Ziad", "Amerr", "x", "y");
+            User.signUp("Kareem", "Wael", "x", "y");
+            User user = User.getUser("Ziad");
+            user.login("x", "y");
+            user.createAccount("USD", "Checking");
+
+
+            if (user.transfer(transferAmount, parseInt(destinationAccountNumber.getText()))) {
+                // ToDo: Add a confirmation message
+            } else {
+                // ToDo: Add an error message
+            }
             changeScene("TransactionsPage.fxml");
         }
 

@@ -1,4 +1,5 @@
 package asu.onlinebankinggui.Controllers;
+import asu.onlinebankinggui.source.src.*;
 
 import asu.onlinebankinggui.DataClasses.AccountData;
 import javafx.fxml.FXML;
@@ -44,8 +45,16 @@ public class DepositPageController implements Initializable {
         error.setVisible(false);
 
         if (confirmation("Confirm Deposit ? ") == ButtonType.YES) {
-            // TODO call Deposit() from Backend
-            changeScene("TransactionsPage.fxml");
+            User user = new User("ziad", "x", "y");
+            assert user.login("x", "y");
+            assert user.isLoggedIn();
+            assert user.useAccount(user.getAccountNums().get(0));
+
+            if (user.deposit(depositAmount)) {
+                changeScene("TransactionsPage.fxml");
+            } else {
+                // ToDo: Couldn't deposit, show error message
+            }
         }
 
     }
