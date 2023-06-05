@@ -353,4 +353,11 @@ public class User {
                 .toList();
     }
 
+    public List<ItemsData> getItemsData(){
+        // TODO return all buy-able items in the system
+    }
+
+    public List<BillsData> getUnpaidBills(){
+        // TODO return unpaid bills of this user
+    }
 }

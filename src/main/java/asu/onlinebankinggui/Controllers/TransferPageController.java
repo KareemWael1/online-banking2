@@ -1,23 +1,18 @@
 package asu.onlinebankinggui.Controllers;
-import asu.onlinebankinggui.source.src.*;
 
-import asu.onlinebankinggui.DataClasses.AccountData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
-import static asu.onlinebankinggui.Controllers.ControllerUtility.confirmation;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.*;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
-public class TransferPageController implements Initializable {
-    private AccountData account;
+public class TransferPageController implements Initializable{
 
     @FXML
     private TextField amount;
@@ -28,7 +23,7 @@ public class TransferPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        account = ControllerUtility.account;
+        error.setVisible(false);
     }
 
     @FXML
@@ -53,19 +48,15 @@ public class TransferPageController implements Initializable {
         error.setVisible(false);
 
         if (confirmation("Confirm Transfer ? ") == ButtonType.YES) {
-            User.signUp("Ziad", "Amerr", "x", "y");
-            User.signUp("Kareem", "Wael", "x", "y");
-            User user = User.getUser("Ziad");
-            user.login("x", "y");
-            user.createAccount("USD", "Checking");
-
-
             if (user.transfer(transferAmount, parseInt(destinationAccountNumber.getText()))) {
-                // ToDo: Add a confirmation message
+                changeScene("TransactionsPage.fxml");
             } else {
-                // ToDo: Add an error message
+                // TODO distinguish between invalid account number and insufficient amount
+                error.setText("Error: check that you entered destination account number correctly\n" +
+                        "and your balance can cover the transfer amount");
+                error.setVisible(true);
             }
-            changeScene("TransactionsPage.fxml");
+
         }
 
     }

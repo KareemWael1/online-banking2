@@ -20,9 +20,10 @@ public class AccountMenuPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        account = ControllerUtility.account;
-        number.setText("Number : " + account.getNumber());
-        balance.setText("Balance : " + account.getBalance() + " " + account.getCurrency());
+        // TODO get current account from user from backend
+//        account = ControllerUtility.account;
+//        number.setText("Number : " + account.getNumber());
+//        balance.setText("Balance : " + account.getBalance() + " " + account.getCurrency());
     }
 
     @FXML

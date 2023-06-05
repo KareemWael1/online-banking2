@@ -1,6 +1,5 @@
 package asu.onlinebankinggui.Controllers;
 
-import asu.onlinebankinggui.DataClasses.AccountData;
 import asu.onlinebankinggui.DataClasses.NotificationData;
 import asu.onlinebankinggui.DataClasses.TransactionData;
 import javafx.collections.FXCollections;
@@ -17,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
-import static asu.onlinebankinggui.DataClasses.DataClassStub.TransactionsStub;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.user;
 
 public class TransactionPageController implements Initializable {
 
@@ -39,7 +38,7 @@ public class TransactionPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        transactionData = FXCollections.observableList(TransactionsStub());
+        transactionData = FXCollections.observableList(user.getTransactionsData());
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         currency.setCellValueFactory(new PropertyValueFactory<>("currency"));

@@ -2,15 +2,19 @@ package asu.onlinebankinggui.Controllers;
 import asu.onlinebankinggui.source.src.*;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.user;
 
-public class LoginPageController {
+public class LoginPageController implements Initializable {
     @FXML
     private TextField username;
     @FXML
@@ -21,6 +25,13 @@ public class LoginPageController {
     private Label emptyUsername;
     @FXML
     private Label emptyPassword;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        incorrect.setVisible(false);
+        emptyPassword.setVisible(false);
+        emptyUsername.setVisible(false);
+    }
 
     @FXML
     protected void onLoginButtonClick() throws IOException{
@@ -43,17 +54,11 @@ public class LoginPageController {
         }
 
         if (valid) {
-            User user = User.getUser(username.getText());
-            if (user == null) {
-                // TODO: User doesn't exist
+            user = User.getUser(username.getText());
+            if (user == null || !user.login(username.getText(), password.getText())) {
+                incorrect.setVisible(true);
             } else {
-                if (user.login(username.getText(), password.getText())) {
-                    // TODO: Login successful
-
-                } else {
-                    // ToDo: Incorrect password
-
-                }
+                changeScene("MainMenuPage.fxml");
             }
         }
 
@@ -63,4 +68,5 @@ public class LoginPageController {
     protected void onCancelButtonClick() throws IOException {
         changeScene("WelcomePage.fxml");
     }
+
 }

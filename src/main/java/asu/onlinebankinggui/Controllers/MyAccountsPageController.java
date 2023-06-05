@@ -1,5 +1,4 @@
 package asu.onlinebankinggui.Controllers;
-import asu.onlinebankinggui.source.src.*;
 
 
 import asu.onlinebankinggui.DataClasses.AccountData;
@@ -14,12 +13,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static asu.onlinebankinggui.Controllers.ControllerUtility.account;
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
-import static asu.onlinebankinggui.DataClasses.DataClassStub.AccountsStub;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.user;
 
 public class MyAccountsPageController implements Initializable{
     @FXML
@@ -41,7 +38,7 @@ public class MyAccountsPageController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        accountsData = FXCollections.observableList(AccountsStub());
+        accountsData = FXCollections.observableList(user.getAccountsData());
         accountNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
         Balance.setCellValueFactory(new PropertyValueFactory<>("balance"));
         currency.setCellValueFactory(new PropertyValueFactory<>("currency"));
@@ -63,17 +60,9 @@ public class MyAccountsPageController implements Initializable{
             select.setText("Please select an account to open");
             return;
         }
-        account = selectedAccount;
 
-        User user = new User("Ziad", "x", "y");
-        assert user.login("x", "y");
-        assert user.isLoggedIn();
-
-        if (user.useAccount(selectedAccount.getNumber())) {
-            changeScene("AccountMenuPage.fxml");
-        } else {
-            // ToDo: Show error message
-        }
+        user.useAccount(selectedAccount.getNumber());
+        changeScene("AccountMenuPage.fxml");
     }
 
     @FXML

@@ -14,9 +14,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.*;
-import static asu.onlinebankinggui.DataClasses.DataClassStub.BillsStub;
-import static asu.onlinebankinggui.DataClasses.DataClassStub.getAvailableItems;
-import static java.lang.Float.parseFloat;
 
 public class PayBillPageController implements Initializable {
     private ArrayList<BillsData> billsData;
@@ -34,11 +31,13 @@ public class PayBillPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        currency.setText(account.getCurrency());
+        // currency.setText(account.getCurrency());
+        // TODO get currency of current account
         billsData = BillsStub();
         for (BillsData billData : billsData) {
             bills.getItems().add(billData.bill());
         }
+        error.setVisible(false);
     }
 
     @FXML

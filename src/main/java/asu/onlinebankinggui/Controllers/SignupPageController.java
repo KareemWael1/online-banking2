@@ -2,15 +2,19 @@ package asu.onlinebankinggui.Controllers;
 import asu.onlinebankinggui.source.src.*;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
 
-public class SignupPageController {
+public class SignupPageController implements Initializable {
     @FXML
     private TextField firstName;
     @FXML
@@ -27,15 +31,30 @@ public class SignupPageController {
     private Label UsernameError;
     @FXML
     private Label passwordError;
+    @FXML
+    private Label signupError;
+    @FXML
+    private Hyperlink login;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        firstNameError.setVisible(false);
+        lastNameError.setVisible(false);
+        UsernameError.setVisible(false);
+        passwordError.setVisible(false);
+        signupError.setVisible(false);
+        login.setVisited(false);
+    }
 
     @FXML
-    protected void onSignupButtonClick() {
+    protected void onSignupButtonClick() throws IOException {
         boolean valid = true;
         String first = firstName.getText();
         String last = lastName.getText();
         String userName = username.getText();
         String pswd = password.getText();
+        signupError.setVisible(false);
+        login.setVisible(false);
 
         if(first.isEmpty()){
             firstNameError.setVisible(true);
@@ -89,17 +108,22 @@ public class SignupPageController {
         }
 
         if (valid) {
-            if (User.signUp(first, last, userName, pswd)) {
-                // ToDo: Change this to the login page
+            if (User.signUp(first, last, userName, pswd)){
+                changeScene("LoginPage.fxml");
             } else {
-                // ToDo: Username already exists
+                signupError.setVisible(true);
+                login.setVisible(true);
             }
         }
-
     }
 
     @FXML
     protected void onCancelButtonClick() throws IOException {
         changeScene("WelcomePage.fxml");
+    }
+
+    @FXML
+    protected void onLoginHyperLinkClicked() throws IOException{
+        changeScene("LoginPage.fxml");
     }
 }

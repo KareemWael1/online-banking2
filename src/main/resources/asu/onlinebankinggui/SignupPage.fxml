@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -38,5 +39,7 @@
       <Label fx:id="lastNameError" layoutX="565.0" layoutY="300.0" maxWidth="206.0" minWidth="100.0" prefHeight="27.0" prefWidth="206.0" text="Last Name is empty" textFill="RED" visible="false" />
       <Label fx:id="UsernameError" layoutX="565.0" layoutY="351.0" maxWidth="206.0" minWidth="100.0" prefHeight="27.0" prefWidth="206.0" text="Username is empty" textFill="RED" visible="false" />
       <Label fx:id="passwordError" layoutX="565.0" layoutY="400.0" maxWidth="206.0" minWidth="100.0" prefHeight="27.0" prefWidth="206.0" text="Password is empty" textFill="RED" visible="false" />
+      <Label fx:id="signupError" alignment="TOP_RIGHT" layoutX="200.0" layoutY="525.0" prefHeight="27.0" prefWidth="226.0" text="Username already exist :" textFill="RED" />
+      <Hyperlink fx:id="login" layoutX="427.0" layoutY="521.0" onAction="#onLoginHyperLinkClicked" onMouseClicked="#onLoginHyperLinkClicked" prefHeight="35.0" prefWidth="150.0" text="Login instead?" />
     </children>
 </AnchorPane>

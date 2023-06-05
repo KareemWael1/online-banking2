@@ -1,7 +1,6 @@
 package asu.onlinebankinggui.Controllers;
 
 import asu.onlinebankinggui.DataClasses.ItemsData;
-import asu.onlinebankinggui.source.src.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -9,12 +8,9 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.*;
-import static asu.onlinebankinggui.DataClasses.DataClassStub.getAvailableItems;
-import static java.lang.Float.parseFloat;
 
 public class BuyItemPageController implements Initializable {
     private ArrayList<ItemsData> itemsData;
@@ -32,11 +28,13 @@ public class BuyItemPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        currency.setText(account.getCurrency());
+        // TODO get currency of current account
+        // currency.setText(account.getCurrency());
         itemsData = getAvailableItems();
         for (ItemsData itemsDatum : itemsData) {
             items.getItems().add(itemsDatum.itemName());
         }
+        error.setVisible(false);
     }
 
     @FXML
@@ -56,18 +54,7 @@ public class BuyItemPageController implements Initializable {
         error.setVisible(false);
 
         if (confirmation("Confirm Buy ? ") == ButtonType.YES) {
-            // TODO call BuyItem() from Backend
-
-            // TODO: User should be logged in and using an account
-            User user = new User("Ziad", "x", "y");
-            assert user.login("x", "y");
-            assert user.isLoggedIn();
-            assert user.createAccount("Saving", "EGP");
-            assert user.useAccount(user.getAccountNums().get(0));
-
-
             if (user.buy(selectedItem.getItemName())) {
-                // TODO: Buy successful
                 changeScene("MyInventoryPage.fxml");
             } else {
                 // ToDo: Buy Unsuccessful

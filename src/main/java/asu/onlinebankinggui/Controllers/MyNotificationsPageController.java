@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
-import static asu.onlinebankinggui.DataClasses.DataClassStub.NotificationStub;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.user;
 
 public class MyNotificationsPageController implements Initializable {
     @FXML
@@ -29,7 +29,7 @@ public class MyNotificationsPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<NotificationData> notificationData = FXCollections.observableList(NotificationStub());
+        ObservableList<NotificationData> notificationData = FXCollections.observableList(user.getNotificationsData());
         message.setCellValueFactory(new PropertyValueFactory<>("message"));
         dateReceived.setCellValueFactory(new PropertyValueFactory<>("dateSent"));
 
