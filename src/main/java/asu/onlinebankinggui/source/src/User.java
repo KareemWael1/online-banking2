@@ -319,6 +319,12 @@ public class User {
             return Collections.emptyList();
         return account.getBills();
     }
+    public String getCurrency(){
+        if (account == null)
+            return null;
+
+        return account.getCurrency();
+    }
 
 
     // Getters for data
@@ -352,23 +358,19 @@ public class User {
                 .map(entry -> new InventoryData(entry.getKey(), entry.getValue()))
                 .toList();
     }
-
-    public static List<ItemsData> getItemsData(){
-        // TODO complete this method
-        List<ItemsData> items = Shop.getItems();
-        return items;
+    public List<ItemData> getItemsData() {
+        return itemsInventory.entrySet()
+                .stream()
+                .map(entry -> new ItemData(
+                        entry.getKey(),
+                        Shop.getItemPrice(entry.getKey()),
+                        entry.getValue()))
+                .toList();
     }
-
-    public List<BillData> getUnpaidBills(){
-        List<BillData> bills = new ArrayList<>();
-        for (Account account: accounts){
-            bills.addAll(account.getBillsData());
-        }
-        return bills;
-    }
-
-    public String getCurrency(){
-        // TODO get currency of current account
-        return "EGP";
+    public List<BillData> getUnpaidBills() {
+        return accounts.stream()
+                .map(Account::getBillsData)
+                .flatMap(List::stream)
+                .toList();
     }
 }

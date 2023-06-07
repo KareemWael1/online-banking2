@@ -1,6 +1,7 @@
 package asu.onlinebankinggui.Controllers;
 
-import asu.onlinebankinggui.DataClasses.ItemsData;
+import asu.onlinebankinggui.DataClasses.ItemData;
+import asu.onlinebankinggui.source.src.Shop;
 import asu.onlinebankinggui.source.src.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,8 +15,8 @@ import java.util.ResourceBundle;
 import static asu.onlinebankinggui.Controllers.ControllerUtility.*;
 
 public class BuyItemPageController implements Initializable {
-    private ArrayList<ItemsData> itemsData;
-    private ItemsData selectedItem;
+    private ArrayList<ItemData> itemsData;
+    private ItemData selectedItem;
 
     @FXML
     private ComboBox<String> items;
@@ -30,8 +31,9 @@ public class BuyItemPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         currency.setText(user.getCurrency());
-        itemsData = (ArrayList<ItemsData>) User.getItemsData();
-        for (ItemsData itemsDatum : itemsData) {
+        // TODO: Items here should be all items from shop not user's items
+        itemsData = (ArrayList<ItemData>) Shop.getAllItemsData();
+        for (ItemData itemsDatum : itemsData) {
             items.getItems().add(itemsDatum.itemName());
         }
         error.setVisible(false);
