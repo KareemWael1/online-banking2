@@ -1,13 +1,13 @@
-//package asu.onlinebankinggui.DataClasses;
-//
-//import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
-//
-//import java.time.LocalDateTime;
-//import java.time.Month;
-//import java.util.ArrayList;
-//
-//public class DataClassStub {
+package asu.onlinebankinggui.DataClasses;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
+
+public class DataClassStub {
 //
 //    public static ArrayList<InventoryData> InventoryStub(){
 //        ArrayList<InventoryData> returnValue = new ArrayList<>();
@@ -34,13 +34,13 @@
 //        return notificationData;
 //    }
 //
-//    public static ArrayList<BillsData> BillsStub(){
-//        ArrayList<BillsData> returnValue = new ArrayList<>();
-//        returnValue.add(new BillsData("Bill#313", 500));
-//        returnValue.add(new BillsData("Bill#505", 2000));
-//        returnValue.add(new BillsData("Bill#1001", 100));
-//        return returnValue;
-//    }
+    public static ArrayList<BillsData> BillsStub(){
+        ArrayList<BillsData> returnValue = new ArrayList<>();
+        returnValue.add(new BillsData("Bill#313", 500));
+        returnValue.add(new BillsData("Bill#505", 2000));
+        returnValue.add(new BillsData("Bill#1001", 100));
+        return returnValue;
+    }
 //
 //    public static ArrayList<TransactionData> TransactionsStub(){
 //        ArrayList<TransactionData> transactionData = new ArrayList<>();
@@ -57,4 +57,4 @@
 //        items.add(new ItemsData("zzz", 49.99f));
 //        return items;
 //    }
-//}
+}

@@ -353,11 +353,22 @@ public class User {
                 .toList();
     }
 
-    public List<ItemsData> getItemsData(){
-        // TODO return all buy-able items in the system
+    public static List<ItemsData> getItemsData(){
+        // TODO complete this method
+        List<ItemsData> items = Shop.getItems();
+        return items;
     }
 
-    public List<BillsData> getUnpaidBills(){
-        // TODO return unpaid bills of this user
+    public List<BillData> getUnpaidBills(){
+        List<BillData> bills = new ArrayList<>();
+        for (Account account: accounts){
+            bills.addAll(account.getBillsData());
+        }
+        return bills;
+    }
+
+    public String getCurrency(){
+        // TODO get currency of current account
+        return "EGP";
     }
 }

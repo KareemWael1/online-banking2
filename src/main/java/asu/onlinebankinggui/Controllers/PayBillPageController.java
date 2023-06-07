@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.*;
+import static asu.onlinebankinggui.DataClasses.DataClassStub.BillsStub;
 
 public class PayBillPageController implements Initializable {
     private ArrayList<BillsData> billsData;
@@ -31,7 +32,7 @@ public class PayBillPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // currency.setText(account.getCurrency());
+        currency.setText(user.getCurrency());
         // TODO get currency of current account
         billsData = BillsStub();
         for (BillsData billData : billsData) {
@@ -63,7 +64,7 @@ public class PayBillPageController implements Initializable {
 
             // ToDo: selectedBill should be of class BillData and not BillsData
             // ToDo: as user.buy(...) takes a bill name string
-            if (user.buy(selectedBill.getName())) {
+            if (user.buy(selectedBill.bill())) {
                 changeScene("AccountMenuPage.fxml");
             } else {
                 // ToDo: Couldn't buy error

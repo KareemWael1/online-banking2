@@ -1,6 +1,7 @@
 package asu.onlinebankinggui.Controllers;
 
 import asu.onlinebankinggui.DataClasses.ItemsData;
+import asu.onlinebankinggui.source.src.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -28,9 +29,8 @@ public class BuyItemPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // TODO get currency of current account
-        // currency.setText(account.getCurrency());
-        itemsData = getAvailableItems();
+        currency.setText(user.getCurrency());
+        itemsData = (ArrayList<ItemsData>) User.getItemsData();
         for (ItemsData itemsDatum : itemsData) {
             items.getItems().add(itemsDatum.itemName());
         }

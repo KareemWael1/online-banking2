@@ -1,5 +1,7 @@
 package asu.onlinebankinggui.source.src;
 
+import asu.onlinebankinggui.DataClasses.ItemsData;
+
 import java.util.*;
 
 public class Shop {
@@ -105,5 +107,10 @@ public class Shop {
             throw new IllegalArgumentException("Bill does not exist");
 
         return bill.getPrice();
+    }
+
+    public static List<ItemsData> getItems(){
+        // TODO get all items
+        return new ArrayList<ItemsData>();
     }
 }

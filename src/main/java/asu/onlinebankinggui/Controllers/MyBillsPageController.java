@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
+import static asu.onlinebankinggui.DataClasses.DataClassStub.BillsStub;
 
 public class MyBillsPageController implements Initializable {
     @FXML
