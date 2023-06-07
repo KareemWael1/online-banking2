@@ -1,7 +1,6 @@
 package asu.onlinebankinggui.Controllers;
 
 import asu.onlinebankinggui.DataClasses.BillsData;
-import asu.onlinebankinggui.DataClasses.ItemsData;
 import asu.onlinebankinggui.source.src.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +9,6 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.*;
@@ -33,7 +31,6 @@ public class PayBillPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         currency.setText(user.getCurrency());
-        // TODO get currency of current account
         billsData = BillsStub();
         for (BillsData billData : billsData) {
             bills.getItems().add(billData.bill());

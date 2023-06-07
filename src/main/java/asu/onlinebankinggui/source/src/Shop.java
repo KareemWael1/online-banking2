@@ -1,6 +1,6 @@
 package asu.onlinebankinggui.source.src;
 
-import asu.onlinebankinggui.DataClasses.ItemsData;
+import asu.onlinebankinggui.DataClasses.ItemData;
 
 import java.util.*;
 
@@ -109,8 +109,14 @@ public class Shop {
         return bill.getPrice();
     }
 
-    public static List<ItemsData> getItems(){
-        // TODO get all items
-        return new ArrayList<ItemsData>();
+    public static List<ItemData> getAllItemsData() {
+        return items.entrySet()
+                .stream()
+                .map(entry -> new ItemData(
+                        entry.getKey().getName(),
+                        entry.getKey().getPrice(),
+                        entry.getValue())
+                )
+                .toList();
     }
 }
