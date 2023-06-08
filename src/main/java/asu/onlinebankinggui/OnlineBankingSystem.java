@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+import static asu.onlinebankinggui.Controllers.ControllerUtility.addData;
+
 public class OnlineBankingSystem extends Application {
     private static Stage stage;
 
@@ -21,6 +23,7 @@ public class OnlineBankingSystem extends Application {
         stage.setResizable(false);
         stage.getIcons().add(new Image(Objects.requireNonNull(OnlineBankingSystem.class.getResourceAsStream("/asu/onlinebankinggui/images/BankIcon.png"))));
         OnlineBankingSystem.stage = stage;
+        addData();
         stage.show();
     }
 

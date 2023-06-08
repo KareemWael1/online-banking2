@@ -290,6 +290,13 @@ public class User {
     public String getUsername() {
         return username;
     }
+
+    public int getAccountNumber() {
+        if (!loggedIn || account == null)
+            return -1;
+        return account.getNumber();
+    }
+
     public int hasHowManyItems(String name) {
         return itemsInventory.getOrDefault(name, 0);
     }

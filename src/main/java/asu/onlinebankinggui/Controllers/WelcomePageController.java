@@ -21,9 +21,4 @@ public class WelcomePageController {
     protected void onExitButtonClick(){
         OnlineBankingSystem.getStage().close();
     }
-
-    @FXML
-    protected void onTest() throws IOException{
-        changeScene("MainMenuPage.fxml");
-    }
 }

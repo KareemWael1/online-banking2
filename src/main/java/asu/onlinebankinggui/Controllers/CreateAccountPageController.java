@@ -25,7 +25,7 @@ public class CreateAccountPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        types.setItems(FXCollections.observableArrayList("Saving", "Checking"));
+        types.setItems(FXCollections.observableArrayList("Savings", "Checking"));
         currencies.setItems(FXCollections.observableArrayList("EGP", "USD"));
         accountTypeMissing.setVisible(false);
         currencyMissing.setVisible(false);
@@ -47,7 +47,7 @@ public class CreateAccountPageController implements Initializable {
         }
 
         if(valid){
-            user.createAccount(types.getValue(), currencies.getValue());
+            user.createAccount(currencies.getValue(), types.getValue());
             changeScene("MyAccountsPage.fxml");
         }
     }

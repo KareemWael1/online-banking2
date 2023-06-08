@@ -24,31 +24,18 @@ public class SignupPageController implements Initializable {
     @FXML
     private PasswordField password;
     @FXML
-    private Label firstNameError;
-    @FXML
-    private Label lastNameError;
-    @FXML
-    private Label UsernameError;
-    @FXML
-    private Label passwordError;
-    @FXML
     private Label signupError;
     @FXML
     private Hyperlink login;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        firstNameError.setVisible(false);
-        lastNameError.setVisible(false);
-        UsernameError.setVisible(false);
-        passwordError.setVisible(false);
         signupError.setVisible(false);
         login.setVisited(false);
     }
 
     @FXML
     protected void onSignupButtonClick() throws IOException {
-        boolean valid = true;
         String first = firstName.getText();
         String last = lastName.getText();
         String userName = username.getText();
@@ -57,63 +44,50 @@ public class SignupPageController implements Initializable {
         login.setVisible(false);
 
         if(first.isEmpty()){
-            firstNameError.setVisible(true);
-            firstNameError.setText("First Name is empty");
-            valid = false;
+            signupError.setVisible(true);
+            signupError.setText("Please fill all the required data");
+            return;
         }
         else if(!first.matches("[a-zA-Z]+")){
-            firstNameError.setVisible(true);
-            firstNameError.setText("First Name must contain only letters");
-            valid = false;
-        }
-        else {
-            firstNameError.setVisible(false);
+            signupError.setVisible(true);
+            signupError.setText("First and Last Name must contain only letters");
+            return;
         }
 
         if(last.isEmpty()){
-            lastNameError.setVisible(true);
-            lastNameError.setText("last Name is empty");
-            valid = false;
+            signupError.setVisible(true);
+            signupError.setText("Please fill all the required data");
+            return;
         }
         else if(!last.matches("[a-zA-Z]+")){
-            lastNameError.setVisible(true);
-            lastNameError.setText("last Name must contain only letters");
-            valid = false;
-        }
-        else {
-            lastNameError.setVisible(false);
+            signupError.setVisible(true);
+            signupError.setText("First and Last Name must contain only letters");
+            return;
         }
 
         if(userName.isEmpty()){
-            UsernameError.setVisible(true);
-            UsernameError.setText("Username is empty");
-            valid = false;
-        }
-        else {
-            UsernameError.setVisible(false);
+            signupError.setVisible(true);
+            signupError.setText("Please fill all the required data");
+            return;
         }
 
         if(pswd.isEmpty()){
-            passwordError.setVisible(true);
-            passwordError.setText("Password is empty");
-            valid = false;
+            signupError.setVisible(true);
+            signupError.setText("Please fill all the required data");
+            return;
         }
         else if(pswd.length() < 8){
-            passwordError.setVisible(true);
-            passwordError.setText("Password must contain at least 8 characters");
-            valid = false;
-        }
-        else {
-            passwordError.setVisible(false);
+            signupError.setVisible(true);
+            signupError.setText("Password must contain at least 8 characters");
+            return;
         }
 
-        if (valid) {
-            if (User.signUp(first, last, userName, pswd)){
-                changeScene("LoginPage.fxml");
-            } else {
-                signupError.setVisible(true);
-                login.setVisible(true);
-            }
+        if (User.signUp(first, last, userName, pswd)){
+            changeScene("LoginPage.fxml");
+        } else {
+            signupError.setVisible(true);
+            signupError.setText("Username already exist :");
+            login.setVisible(true);
         }
     }
 

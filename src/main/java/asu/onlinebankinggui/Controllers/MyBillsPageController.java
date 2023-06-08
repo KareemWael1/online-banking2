@@ -1,6 +1,6 @@
 package asu.onlinebankinggui.Controllers;
 
-import asu.onlinebankinggui.DataClasses.BillsData;
+import asu.onlinebankinggui.DataClasses.BillData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,28 +11,36 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
-import static asu.onlinebankinggui.DataClasses.DataClassStub.BillsStub;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.user;
 
 public class MyBillsPageController implements Initializable {
     @FXML
-    private TableView<BillsData> bills;
+    private TableView<BillData> bills;
 
     @FXML
-    private TableColumn<BillsData, String> bill;
+    private TableColumn<BillData, String> bill;
     @FXML
-    private TableColumn<BillsData, String> price;
+    private TableColumn<BillData, String> price;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // TODO select default price for bills
         price.setText("Price (in " + "EGP" + ")");
-        ObservableList<BillsData> billsData = FXCollections.observableList(BillsStub());
-        bill.setCellValueFactory(new PropertyValueFactory<BillsData, String>("bill"));
-        price.setCellValueFactory(new PropertyValueFactory<BillsData, String>("price"));
+        List<BillData> allBills = user.getUnpaidBills();
+        List<BillData> unpaidBills = new ArrayList<>();
+        for(BillData bill : allBills){
+            if(!bill.getIsPaid()){
+                unpaidBills.add(bill);
+            }
+        }
+        ObservableList<BillData> billsData = FXCollections.observableList(unpaidBills);
+        bill.setCellValueFactory(new PropertyValueFactory<>("name"));
+        price.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         bills.setItems(billsData);
     }

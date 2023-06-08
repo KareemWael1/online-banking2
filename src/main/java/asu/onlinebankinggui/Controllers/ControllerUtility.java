@@ -1,6 +1,9 @@
 package asu.onlinebankinggui.Controllers;
 
 import asu.onlinebankinggui.OnlineBankingSystem;
+import asu.onlinebankinggui.source.src.Bill;
+import asu.onlinebankinggui.source.src.Item;
+import asu.onlinebankinggui.source.src.Shop;
 import asu.onlinebankinggui.source.src.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -36,5 +39,23 @@ public class ControllerUtility {
         stage.getIcons().add(new Image(Objects.requireNonNull(OnlineBankingSystem.class.getResourceAsStream("/asu/onlinebankinggui/images/BankIcon.png"))));
         alert.showAndWait();
         return alert.getResult();
+    }
+
+    public static void addData(){
+        User.signUp("Kareem", "Wael", "kimo", "aaaaaaaa");
+        User user1 = User.getUser("kimo");
+        user1.login("kimo", "aaaaaaaa");
+        user1.createAccount("EGP", "Checking");
+        user1.useAccount(user1.getAccountNums().get(0));
+
+        Shop.addNewItem("Gift", 10, 100);
+        Shop.addNewItem("Cup", 5, 50);
+
+        Bill bill1 = new Bill("Electricity_May_2023", 200, user1.getAccountNums().get(0));
+        Bill bill2 = new Bill("Gas_April_2023", 133, user1.getAccountNums().get(0));
+        // TODO add bills to the user
+
+        user1.deposit(200);
+        user1.buy("Gift");
     }
 }

@@ -29,7 +29,7 @@ public class MyInventoryPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<InventoryData> inventoryData = FXCollections.observableList(user.getInventoryData());
-        itemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        itemName.setCellValueFactory(new PropertyValueFactory<>("item"));
         count.setCellValueFactory(new PropertyValueFactory<>("count"));
 
         items.setItems(inventoryData);

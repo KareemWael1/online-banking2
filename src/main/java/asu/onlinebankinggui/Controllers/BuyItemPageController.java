@@ -10,12 +10,13 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.*;
 
 public class BuyItemPageController implements Initializable {
-    private ArrayList<ItemData> itemsData;
+    private List<ItemData> itemsData;
     private ItemData selectedItem;
 
     @FXML
@@ -32,7 +33,7 @@ public class BuyItemPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         currency.setText(user.getCurrency());
         // TODO: Items here should be all items from shop not user's items
-        itemsData = (ArrayList<ItemData>) Shop.getAllItemsData();
+        itemsData = Shop.getAllItemsData();
         for (ItemData itemsDatum : itemsData) {
             items.getItems().add(itemsDatum.itemName());
         }

@@ -20,7 +20,7 @@ class Account {
 
     // Constructor
     Account(User user, String currency, String type) {
-        number = counter++;
+        number = ++counter;
         balance = 0;
         this.user = user;
         if (!currency.equals("EGP") && !currency.equals("USD"))

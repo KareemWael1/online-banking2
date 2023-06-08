@@ -1,6 +1,5 @@
 package asu.onlinebankinggui.Controllers;
 
-import asu.onlinebankinggui.DataClasses.AccountData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -10,9 +9,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.changeScene;
+import static asu.onlinebankinggui.Controllers.ControllerUtility.user;
 
 public class AccountMenuPageController implements Initializable {
-    private AccountData account;
+
     @FXML
     private Label number;
     @FXML
@@ -20,10 +20,8 @@ public class AccountMenuPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // TODO get current account from user from backend
-//        account = ControllerUtility.account;
-//        number.setText("Number : " + account.getNumber());
-//        balance.setText("Balance : " + account.getBalance() + " " + account.getCurrency());
+        number.setText("Number : " + user.getAccountNumber());
+        balance.setText("Balance : " + user.getBalance() + " " + user.getCurrency());
     }
 
     @FXML

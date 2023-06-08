@@ -3,6 +3,7 @@ import asu.onlinebankinggui.source.src.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,12 +26,15 @@ public class LoginPageController implements Initializable {
     private Label emptyUsername;
     @FXML
     private Label emptyPassword;
+    @FXML
+    private Hyperlink signupInstead;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         incorrect.setVisible(false);
         emptyPassword.setVisible(false);
         emptyUsername.setVisible(false);
+        signupInstead.setVisible(false);
     }
 
     @FXML
@@ -57,11 +61,17 @@ public class LoginPageController implements Initializable {
             user = User.getUser(username.getText());
             if (user == null || !user.login(username.getText(), password.getText())) {
                 incorrect.setVisible(true);
+                signupInstead.setVisible(true);
             } else {
                 changeScene("MainMenuPage.fxml");
             }
         }
 
+    }
+
+    @FXML
+    protected void onSignupInsteadClicked() throws IOException{
+        changeScene("SignupPage.fxml");
     }
 
     @FXML
