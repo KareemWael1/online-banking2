@@ -78,9 +78,4 @@ public class LoginPageController implements Initializable {
     protected void onCancelButtonClick() throws IOException {
         changeScene("WelcomePage.fxml");
     }
-
-    @FXML
-    protected void onOpenCameraButtonClicked(){
-        // TODO fill here
-    }
 }
