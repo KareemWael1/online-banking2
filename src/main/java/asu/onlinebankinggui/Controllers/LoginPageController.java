@@ -79,4 +79,8 @@ public class LoginPageController implements Initializable {
         changeScene("WelcomePage.fxml");
     }
 
+    @FXML
+    protected void onOpenCameraButtonClicked(){
+        // TODO fill here
+    }
 }

@@ -28,8 +28,6 @@ public class TransactionPageController implements Initializable {
     @FXML
     private TableColumn<TransactionData, Double> amount;
     @FXML
-    private TableColumn<TransactionData, String> currency;
-    @FXML
     private TableColumn<TransactionData, String> type;
     @FXML
     private TableColumn<NotificationData, LocalDateTime> date;
@@ -38,10 +36,10 @@ public class TransactionPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        amount.setText("Amount (" + user.getCurrency() + ")");
         transactionData = FXCollections.observableList(user.getTransactionsData());
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        currency.setCellValueFactory(new PropertyValueFactory<>("currency"));
         type.setCellValueFactory(new PropertyValueFactory<>("type"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
 

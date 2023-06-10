@@ -17,10 +17,9 @@
         <TableView fx:id="transactions" layoutX="106.0" layoutY="150.0" prefHeight="300.0" prefWidth="588.0" stylesheets="@css/main.css">
             <columns>
                 <TableColumn fx:id="id" prefWidth="144.0" styleClass="table" text="Transaction ID" />
-                <TableColumn fx:id="amount" minWidth="104.79998779296875" prefWidth="104.79998779296875" styleClass="table" text="Amount" />
-                <TableColumn fx:id="currency" prefWidth="87.20001220703125" styleClass="table" text="Currency" />
+                <TableColumn fx:id="amount" minWidth="104.79998779296875" prefWidth="104.79998779296875" styleClass="table" text="Amount (EGP)" />
             <TableColumn fx:id="type" prefWidth="101.60003662109375" styleClass="table" text="Type" />
-            <TableColumn fx:id="date" prefWidth="147.99993896484375" styleClass="table" text="Date" />
+            <TableColumn fx:id="date" prefWidth="232.800048828125" styleClass="table" text="Date" />
             </columns>
         </TableView>
         <Button layoutX="332.0" layoutY="496.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="41.0" prefWidth="135.0" styleClass="back_button" text="Back">

@@ -31,7 +31,7 @@ public class SignupPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         signupError.setVisible(false);
-        login.setVisited(false);
+        login.setVisible(false);
     }
 
     @FXML

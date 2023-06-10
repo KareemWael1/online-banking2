@@ -2,7 +2,6 @@ package asu.onlinebankinggui.Controllers;
 
 import asu.onlinebankinggui.OnlineBankingSystem;
 import asu.onlinebankinggui.source.src.Bill;
-import asu.onlinebankinggui.source.src.Item;
 import asu.onlinebankinggui.source.src.Shop;
 import asu.onlinebankinggui.source.src.User;
 import javafx.fxml.FXMLLoader;
@@ -51,9 +50,8 @@ public class ControllerUtility {
         Shop.addNewItem("Gift", 10, 100);
         Shop.addNewItem("Cup", 5, 50);
 
-        Bill bill1 = new Bill("Electricity_May_2023", 200, user1.getAccountNums().get(0));
-        Bill bill2 = new Bill("Gas_April_2023", 133, user1.getAccountNums().get(0));
-        // TODO add bills to the user
+        Shop.addBill("Electricity_May_2023", 200, user1.getAccountNums().get(0));
+        Shop.addBill("Gas_April_2023", 133, user1.getAccountNums().get(0));
 
         user1.deposit(200);
         user1.buy("Gift");

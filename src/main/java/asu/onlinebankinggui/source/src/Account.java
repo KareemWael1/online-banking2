@@ -68,9 +68,6 @@ class Account {
         transactions.add(new Transaction(amount, this.getNumber(), otherAccountNumber));
     }
     public void transact(String name) {
-        if (!Shop.itemExisted(name))
-            throw new IllegalArgumentException(String.format("Item with name %s does not exist", name));
-
         transactions.add(new Transaction(this.getNumber(), name));
     }
 

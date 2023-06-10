@@ -61,14 +61,12 @@ public class PayBillPageController implements Initializable {
 
         if (confirmation("Confirm Payment ? ") == ButtonType.YES) {
             if (user.buy(selectedBill.name())) {
-                changeScene("AccountMenuPage.fxml");
+                changeScene("MyBillsPage.fxml");
             } else {
                 error.setText("Not enough funds");
                 error.setVisible(true);
             }
-            changeScene("MyBillsPage.fxml");
         }
-
     }
 
     @FXML
