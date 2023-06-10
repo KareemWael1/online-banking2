@@ -2,8 +2,9 @@ package asu.onlinebankinggui.DataClasses;
 
 import java.time.LocalDateTime;
 
-
 public record TransactionData(
+        String type,
+        int id,
         int fromAccountNumber,
         float amount,
         LocalDateTime date,
@@ -29,5 +30,10 @@ public record TransactionData(
     public String getBuyableName() {
         return buyableName;
     }
+    public String getType() {
+        return type;
+    }
+    public int getId() {
+        return id;
+    }
 }
-

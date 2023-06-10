@@ -6,7 +6,7 @@ import java.util.List;
 import asu.onlinebankinggui.DataClasses.AccountData;
 import asu.onlinebankinggui.DataClasses.*;
 
-class Account {
+public class Account {
     private static final ArrayList<Account> accounts = new ArrayList<>();
     private static int counter = 0;
     private final int number;
@@ -20,7 +20,7 @@ class Account {
 
     // Constructor
     Account(User user, String currency, String type) {
-        number = ++counter;
+        number = counter++;
         balance = 0;
         this.user = user;
         if (!currency.equals("EGP") && !currency.equals("USD"))
@@ -46,9 +46,15 @@ class Account {
 
     // Money functions
     public void deposit(float amount) {
+        if (amount < 0)
+            throw new IllegalArgumentException("Amount must be positive");
+
         balance += amount;
     }
     public boolean withdraw(float amount) {
+        if (amount < 0)
+            throw new IllegalArgumentException("Amount must be positive");
+
         float newBalance = balance - amount;
         if (newBalance < 0) {
             return false;
@@ -65,10 +71,13 @@ class Account {
         if (other == null)
             throw new IllegalArgumentException(String.format("Account with number %d does not exist", otherAccountNumber));
 
-        transactions.add(new Transaction(amount, this.getNumber(), otherAccountNumber));
+        transactions.add(new Transaction("Money Transfer", amount, this.getNumber(), otherAccountNumber));
     }
     public void transact(String name) {
-        transactions.add(new Transaction(this.getNumber(), name));
+        if (!Shop.itemExisted(name))
+            throw new IllegalArgumentException(String.format("Item with name %s does not exist", name));
+
+        transactions.add(new Transaction("Payment", this.getNumber(), name));
     }
 
 
@@ -99,7 +108,13 @@ class Account {
                 type
         );
     }
-    public void addBill(Bill bill) {
+    void addBill(Bill bill) {
+        Account account = Account.getAccountByNumber(bill.getAccountNumber());
+        if (account == null)
+            throw new IllegalArgumentException("Account does not exist");
+
+        if (bill.getPrice() < 0)
+            throw new IllegalArgumentException("Price cannot be negative");
         bills.add(bill);
     }
     public boolean hasBill(String name) {
