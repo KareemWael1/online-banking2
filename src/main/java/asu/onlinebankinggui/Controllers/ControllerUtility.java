@@ -41,19 +41,31 @@ public class ControllerUtility {
     }
 
     public static void addData(){
-        User.signUp("Kareem", "Wael", "kimo", "aaaaaaaa");
-        User user1 = User.getUser("kimo");
-        user1.login("kimo", "aaaaaaaa");
+        User.signUp("Ziad", "Amerr", "ziad", "1234");
+        User.signUp("Kareem", "Wael", "kimo", "1234");
+
+        User user1 = User.getUser("ziad");
+        User user2 = User.getUser("kimo");
+
+        user1.login("ziad", "1234");
+        user2.login("kimo", "1234");
+
         user1.createAccount("EGP", "Checking");
+        user2.createAccount("USD", "Savings");
+
         user1.useAccount(user1.getAccountNums().get(0));
+        user2.useAccount(user2.getAccountNums().get(0));
 
         Shop.addNewItem("Gift", 10, 100);
         Shop.addNewItem("Cup", 5, 50);
 
-        Shop.addBill("Electricity_May_2023", 200, user1.getAccountNums().get(0));
-        Shop.addBill("Gas_April_2023", 133, user1.getAccountNums().get(0));
+        Shop.addBill("Electricity_May_2023", 200, user1.getAccountNumber());
+        Shop.addBill("Gas_April_2023", 133, user1.getAccountNumber());
 
         user1.deposit(200);
+        user2.deposit(1000);
         user1.buy("Gift");
+        user1.logout();
+        user2.logout();
     }
 }

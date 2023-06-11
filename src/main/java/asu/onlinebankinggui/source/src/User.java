@@ -188,12 +188,40 @@ public class User {
         }
 
         if (account.withdraw(amount)) {
-            toAcc.deposit(Helpers.convert(account.getCurrency(), toAcc.getCurrency(), amount));
-            notifications.add(
-                    new Notification("You transferred " + amount + " to " + toAcc.getUsername())
+            float amountInToAccCurrency = Helpers.convert(account.getCurrency(), toAcc.getCurrency(), amount);
+            toAcc.deposit(amountInToAccCurrency);
+            Notification notificationSender, notificationReceiver;
+
+            notificationSender = new Notification(
+                    String.format(
+                            "You transferred %.2f%s%s to %s (%d)",
+                            amount,
+                            getCurrency(),
+                            !toAcc.getCurrency().equals(getCurrency()) ? String.format(" (%.2f%s)", amountInToAccCurrency, toAcc.getCurrency()) : "",
+                            toAcc.getUsername(),
+                            toAcc.getNumber()
+                    )
             );
 
+
+            notificationReceiver = new Notification(
+                String.format(
+                    "You received %.2f%s%s from %s (%d)",
+                    amountInToAccCurrency,
+                    toAcc.getCurrency(),
+                    !account.getCurrency().equals(toAcc.getCurrency()) ? String.format(" (%.2f%s)", amount, account.getCurrency()) : "",
+                    account.getUsername(),
+                    account.getNumber()
+                )
+            );
+
+
             account.transact(amount, account.getNumber());
+
+            notifications.add(notificationSender);
+            toAcc.sendNotification(notificationReceiver);
+
+            toAcc.transact(amount, account.getNumber());
 
             return true;
         } else {
@@ -224,7 +252,7 @@ public class User {
 
         account.deposit(amount);  // account.balance += amount
         notifications.add(
-                new Notification("You deposited " + amount + " to your account")
+                new Notification("You deposited " + amount + getCurrency() + " to your account")
         );
 
         account.transact(amount, account.getNumber());
