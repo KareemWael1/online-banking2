@@ -51,8 +51,7 @@ public class TransferPageController implements Initializable{
             if (user.transfer(transferAmount, parseInt(destinationAccountNumber.getText()))) {
                 changeScene("TransactionsPage.fxml");
             } else {
-                // TODO distinguish between invalid account number and insufficient amount
-                error.setText("Error: check that you entered destination account number correctly\n" +
+                error.setText("Error: check that you entered destination account number correctly " +
                         "and your balance can cover the transfer amount");
                 error.setVisible(true);
             }

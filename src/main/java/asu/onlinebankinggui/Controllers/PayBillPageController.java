@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.*;
+import static asu.onlinebankinggui.source.src.Helpers.convert;
 
 public class PayBillPageController implements Initializable {
     private List<BillData> billsData;
@@ -47,6 +48,9 @@ public class PayBillPageController implements Initializable {
     protected void onItemSelection(){
         selectedBill = billsData.get(bills.getSelectionModel().getSelectedIndex());
         price.setText(String.valueOf(selectedBill.price()));
+        if(!currency.getText().equals("EGP")){
+            price.setText(Float.toString(convert("EGP", currency.getText(), Float.parseFloat(price.getText()))));
+        }
     }
 
     @FXML

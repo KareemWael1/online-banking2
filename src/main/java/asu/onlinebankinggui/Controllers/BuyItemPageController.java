@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static asu.onlinebankinggui.Controllers.ControllerUtility.*;
+import static asu.onlinebankinggui.source.src.Helpers.convert;
 
 public class BuyItemPageController implements Initializable {
     private List<ItemData> itemsData;
@@ -44,6 +45,9 @@ public class BuyItemPageController implements Initializable {
     protected void onItemSelection(){
         selectedItem = itemsData.get(items.getSelectionModel().getSelectedIndex());
         price.setText(String.valueOf(selectedItem.price()));
+        if(!currency.getText().equals("EGP")){
+            price.setText(Float.toString(convert("EGP", currency.getText(), Float.parseFloat(price.getText()))));
+        }
     }
 
     @FXML
@@ -60,8 +64,8 @@ public class BuyItemPageController implements Initializable {
             if (user.buy(selectedItem.getItemName())) {
                 changeScene("MyInventoryPage.fxml");
             } else {
-                // ToDo: Buy Unsuccessful
-
+                error.setText("Not enough funds");
+                error.setVisible(true);
             }
         }
 

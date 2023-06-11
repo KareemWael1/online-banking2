@@ -41,14 +41,14 @@ public class ControllerUtility {
     }
 
     public static void addData(){
-        User.signUp("Ziad", "Amerr", "ziad", "1234");
-        User.signUp("Kareem", "Wael", "kimo", "1234");
+        User.signUp("Ziad", "Amerr", "ziad", "12345678");
+        User.signUp("Kareem", "Wael", "kimo", "aaaaaaaa");
 
         User user1 = User.getUser("ziad");
         User user2 = User.getUser("kimo");
 
-        user1.login("ziad", "1234");
-        user2.login("kimo", "1234");
+        user1.login("ziad", "12345678");
+        user2.login("kimo", "aaaaaaaa");
 
         user1.createAccount("EGP", "Checking");
         user2.createAccount("USD", "Savings");
