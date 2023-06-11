@@ -27,16 +27,16 @@
                 <Font name="PT Bold Heading" size="14.0" />
             </font>
         </Button>
-        <Label layoutX="225.0" layoutY="350.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Username" />
-        <Label layoutX="225.0" layoutY="400.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Password" />
-        <TextField fx:id="username" layoutX="326.0" layoutY="350.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
-        <PasswordField fx:id="password" layoutX="326.0" layoutY="400.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
         <Label layoutX="225.0" layoutY="250.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="First Name" />
         <Label layoutX="225.0" layoutY="300.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Last Name" />
-        <TextField fx:id="lastName" layoutX="325.0" layoutY="300.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
+        <Label layoutX="225.0" layoutY="350.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Username" />
+        <Label layoutX="225.0" layoutY="400.0" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Password" />
         <TextField fx:id="firstName" layoutX="325.0" layoutY="250.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
-      <Label fx:id="signupError" alignment="TOP_RIGHT" layoutX="287.0" layoutY="525.0" prefHeight="27.0" prefWidth="226.0" text="Username already exist :" textFill="RED" />
-      <Hyperlink fx:id="login" layoutX="519.0" layoutY="521.0" onAction="#onLoginHyperLinkClicked" onMouseClicked="#onLoginHyperLinkClicked" prefHeight="35.0" prefWidth="150.0" text="Login instead?" />
-      <Label alignment="CENTER" layoutY="200.0" prefHeight="27.0" prefWidth="800.0" style="-fx-font-size: 28;" text="Signup" />
+        <TextField fx:id="lastName" layoutX="325.0" layoutY="300.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
+        <TextField fx:id="username" layoutX="326.0" layoutY="350.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
+        <PasswordField fx:id="password" layoutX="326.0" layoutY="400.0" maxHeight="30.0" maxWidth="225.0" minHeight="30.0" minWidth="225.0" prefHeight="30.0" prefWidth="225.0" />
+        <Label fx:id="signupError" alignment="TOP_RIGHT" layoutX="287.0" layoutY="525.0" prefHeight="27.0" prefWidth="226.0" text="Username already exist :" textFill="RED" />
+        <Hyperlink fx:id="login" layoutX="519.0" layoutY="521.0" onAction="#onLoginHyperLinkClicked" onMouseClicked="#onLoginHyperLinkClicked" prefHeight="35.0" prefWidth="150.0" text="Login instead?" />
+        <Label alignment="CENTER" layoutY="200.0" prefHeight="27.0" prefWidth="800.0" style="-fx-font-size: 28;" text="Signup" />
     </children>
 </AnchorPane>

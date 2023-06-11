@@ -79,6 +79,9 @@ public class Account {
 
         transactions.add(new Transaction("Payment", this.getNumber(), name));
     }
+    public void sendNotification(Notification notification) {
+        user.getNotifications().add(notification);
+    }
 
 
     // getters
