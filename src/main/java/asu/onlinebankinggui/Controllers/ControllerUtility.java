@@ -1,7 +1,6 @@
 package asu.onlinebankinggui.Controllers;
 
 import asu.onlinebankinggui.OnlineBankingSystem;
-import asu.onlinebankinggui.source.src.Bill;
 import asu.onlinebankinggui.source.src.Shop;
 import asu.onlinebankinggui.source.src.User;
 import javafx.beans.value.ChangeListener;
@@ -46,14 +45,12 @@ public class ControllerUtility {
     public static void floatOnly(TextField amount) {
         amount.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*\\.?\\d*")) {
-                    // disallow dots that appear after the first one
-                    if (newValue.matches(".*\\..*\\..*")) {
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("-?\\d*\\.?\\d*")) {
+                    if (newValue.matches(".*\\..*\\..*") || newValue.matches("-.*-.*") || newValue.startsWith("-.")) {
                         amount.setText(oldValue);
                     } else {
-                        amount.setText(newValue.replaceAll("[^\\d.]", ""));
+                        amount.setText(newValue.replaceAll("[^\\d.-]", ""));
                     }
                 }
             }
