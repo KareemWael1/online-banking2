@@ -4,11 +4,14 @@ import asu.onlinebankinggui.OnlineBankingSystem;
 import asu.onlinebankinggui.source.src.Bill;
 import asu.onlinebankinggui.source.src.Shop;
 import asu.onlinebankinggui.source.src.User;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -38,6 +41,23 @@ public class ControllerUtility {
         stage.getIcons().add(new Image(Objects.requireNonNull(OnlineBankingSystem.class.getResourceAsStream("/asu/onlinebankinggui/images/BankIcon.png"))));
         alert.showAndWait();
         return alert.getResult();
+    }
+
+    public static void floatOnly(TextField amount) {
+        amount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*\\.?\\d*")) {
+                    // disallow dots that appear after the first one
+                    if (newValue.matches(".*\\..*\\..*")) {
+                        amount.setText(oldValue);
+                    } else {
+                        amount.setText(newValue.replaceAll("[^\\d.]", ""));
+                    }
+                }
+            }
+        });
     }
 
     public static void addData(){
