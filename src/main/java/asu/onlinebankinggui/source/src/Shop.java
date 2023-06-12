@@ -8,7 +8,10 @@ public class Shop {
     private static final Map<Item, Integer> items = new HashMap<>();
     private static final ArrayList<Bill> bills = new ArrayList<>();
 
-
+    public static void reset() {
+        items.clear();
+        bills.clear();
+    }
     // Constructor
     private Shop() {} // Prevent instantiation
 

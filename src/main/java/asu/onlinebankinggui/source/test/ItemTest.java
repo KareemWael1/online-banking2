@@ -1,35 +1,35 @@
 package asu.onlinebankinggui.source.test;
 
-import org.junit.jupiter.api.Test;
-import asu.onlinebankinggui.source.src.Item;
+import org.junit.Test;
+import asu.onlinebankinggui.source.src.*;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class ItemTest {
+public class ItemTest {
 
     @Test
-    void testEquals() {
+    public void testEquals() {
         Item item = new Item("cola",32);
         Item item2 = new Item("cola",32);
         assertEquals(item, item2);
     }
 
     @Test
-    void testEqualsDiffPrice(){
+    public void testEqualsDiffPrice(){
         Item item = new Item("cola",32);
         Item item2 = new Item("cola",39);
         assertNotEquals(item, item2);
     }
 
     @Test
-    void testEqualsDiffName(){
+    public void testEqualsDiffName(){
         Item item = new Item("pepsi",32);
         Item item2 = new Item("cola",39);
         assertNotEquals(item, item2);
     }
 
     @Test
-    void testConstructor(){
+    public void testConstructor(){
         assertThrows(IllegalArgumentException.class,()->new Item("cola",-12));
     }
 }

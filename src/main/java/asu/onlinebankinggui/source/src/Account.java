@@ -19,7 +19,7 @@ public class Account {
 
 
     // Constructor
-    Account(User user, String currency, String type) {
+    public Account(User user, String currency, String type) {
         number = counter++;
         balance = 0;
         this.user = user;
@@ -108,7 +108,7 @@ public class Account {
                 type
         );
     }
-    void addBill(Bill bill) {
+    public void addBill(Bill bill) {
         Account account = Account.getAccountByNumber(bill.getAccountNumber());
         if (account == null)
             throw new IllegalArgumentException("Account does not exist");

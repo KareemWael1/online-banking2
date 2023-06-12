@@ -1,11 +1,11 @@
 package asu.onlinebankinggui.source.test;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.Test;
-
 import asu.onlinebankinggui.source.src.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TestUserUseAccount {
     static User user;
